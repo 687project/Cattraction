@@ -2,7 +2,7 @@ import Banner from "./Banner";
 import Navbar from "./Navbar";
 import Content from "./Content";
 import Container from "@material-ui/core/Container";
-import React, {Fragment, useEffect} from "react";
+import React, {useEffect} from "react";
 import * as actions from "../../actions/home";
 import {connect} from "react-redux";
 import {
@@ -10,7 +10,6 @@ import {
     Route,
     useRouteMatch
 } from "react-router-dom";
-import Header from "../common/Header";
 
 const sections = [
     {
@@ -47,22 +46,19 @@ function Home(props) {
     });
 
     return (
-        <Fragment>
-            <Header/>
-            <Container maxWidth="lg">
-                <Banner/>
-                <Navbar sections={sections}/>
-                <Switch>
-                    {
-                        sections.map((section) => (
-                            <Route path={`/t/${section.path}`} key={`home-${section.path}`}>
-                                <Content/>
-                            </Route>
-                        ))
-                    }
-                </Switch>
-            </Container>
-        </Fragment>
+        <Container maxWidth="lg">
+            <Banner/>
+            <Navbar sections={sections}/>
+            <Switch>
+                {
+                    sections.map((section) => (
+                        <Route path={`/t/${section.path}`} key={`home-${section.path}`}>
+                            <Content/>
+                        </Route>
+                    ))
+                }
+            </Switch>
+        </Container>
     )
 }
 

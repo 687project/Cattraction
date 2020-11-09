@@ -1,8 +1,7 @@
 import Container from "@material-ui/core/Container";
-import React, {Fragment} from "react";
+import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Header from "../common/Header";
 import banner from "../../statics/user-banner.png"
 import {Avatar} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
@@ -31,41 +30,36 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(10),
         height: theme.spacing(10),
     },
-    userInfo: {
-
-    },
+    userInfo: {},
 }));
 
 function User(props) {
     const classes = useStyles();
 
     return (
-        <Fragment>
-            <Header/>
-            <Container maxWidth="lg">
-                <Grid container justify="center" spacing={5} className={classes.gridContainer}>
-                    <Grid item xs={12} md={7}>
-                        <Paper className={classes.grid} elevation={0}>
-                            <div className={classes.bannerWrapper}>
-                                <div className={classes.avatarWrapper}>
-                                    <Avatar className={classes.avatar}>
+        <Container maxWidth="lg">
+            <Grid container justify="center" spacing={5} className={classes.gridContainer}>
+                <Grid item xs={12} md={7}>
+                    <Paper className={classes.grid} elevation={0}>
+                        <div className={classes.bannerWrapper}>
+                            <div className={classes.avatarWrapper}>
+                                <Avatar className={classes.avatar}>
 
-                                    </Avatar>
-                                </div>
+                                </Avatar>
                             </div>
-                            <div className={classes.userInfo}>
-                                userInfo
-                            </div>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                        <Paper className={classes.grid} elevation={0}>
-                            Side
-                        </Paper>
-                    </Grid>
+                        </div>
+                        <div className={classes.userInfo}>
+                            userInfo
+                        </div>
+                    </Paper>
                 </Grid>
-            </Container>
-        </Fragment>
+                <Grid item xs={12} md={3}>
+                    <Paper className={classes.grid} elevation={0}>
+                        Side
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 
@@ -73,8 +67,6 @@ const mapStatesToProps = (state) => ({
     user: state.getIn(['user', '']),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStatesToProps, mapDispatchToProps)(User)
