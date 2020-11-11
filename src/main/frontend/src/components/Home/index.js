@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {
     Switch,
     Route,
-    useRouteMatch
+    useRouteMatch, Redirect
 } from "react-router-dom";
 
 const sections = [
@@ -57,6 +57,7 @@ function Home(props) {
                         </Route>
                     ))
                 }
+                <Redirect from="/" to="/t/recommendation" />
             </Switch>
         </Container>
     )

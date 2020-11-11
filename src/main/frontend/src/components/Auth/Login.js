@@ -29,21 +29,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login(props) {
-    const {open, handleClose, handleLogin} = props;
+    const {isLoginDialogVisible, handleClose, handleLogin} = props;
 
     const classes = useStyles();
 
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={isLoginDialogVisible} onClose={handleClose}>
             <DialogTitle>Login</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Welcome to Cattraction!
                 </DialogContentText>
-                <form className={classes.form} noValidate>
+                <form className={classes.form}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
+                                value={props.email}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -51,10 +52,12 @@ function Login(props) {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                onChange={props.changeEmail}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                value={props.password}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -63,11 +66,13 @@ function Login(props) {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                helperText={props.loginError}
+                                onChange={props.changePassword}
                             />
                         </Grid>
                     </Grid>
                     <Button
-                        onClick={handleLogin}
+                        onClick={() => handleLogin(props.email, props.password)}
                         fullWidth
                         variant="contained"
                         color="primary"
@@ -76,11 +81,6 @@ function Login(props) {
                         Log In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
                         <Grid item>
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
@@ -96,7 +96,10 @@ function Login(props) {
 }
 
 const mapStateToProps = (state) => ({
-    open: state.getIn(['auth', 'open'])
+    isLoginDialogVisible: state.getIn(['auth', 'isLoginDialogVisible']),
+    loginError: state.getIn(['auth', 'loginError']),
+    email: state.getIn(['auth', 'email']),
+    password: state.getIn(['auth', 'password']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -104,10 +107,18 @@ const mapDispatchToProps = (dispatch) => ({
         const action = authActions.closeLogin();
         dispatch(action);
     },
-    handleLogin() {
-        const action = authActions.login();
+    handleLogin(email, password) {
+        const action = authActions.login(email, password);
         dispatch(action);
-    }
+    },
+    changeEmail(e) {
+        const action = authActions.changeEmail(e.target.value);
+        dispatch(action);
+    },
+    changePassword(e) {
+        const action = authActions.changePassword(e.target.value);
+        dispatch(action);
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

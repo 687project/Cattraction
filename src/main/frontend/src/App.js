@@ -8,6 +8,7 @@ import SignUp from "./components/Auth/SignUp";
 import Login from "./components/Auth/Login";
 import User from "./components/User";
 import Header from "./components/common/Header";
+import CreatePost from "./components/CreatePost";
 
 const theme = createMuiTheme({
     shape: {
@@ -15,7 +16,7 @@ const theme = createMuiTheme({
     },
     palette: {
         primary: {
-            main: '#2196f3'
+            main: '#f73378',
         },
         background: {
             default: '#f5f5fa',
@@ -30,6 +31,7 @@ export default function App() {
             <Header />
             <Switch>
                 <Route path="/posts/:id" exact component={Post}/>
+                <Route path="/newpost" exact component={CreatePost}/>
                 <Route path="/users/:id" exact component={User}/>
                 <Route path={["/", "/home", "/t/:topic"]} exact component={Home}/>
             </Switch>

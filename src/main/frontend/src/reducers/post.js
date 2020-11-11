@@ -2,6 +2,7 @@ import {fromJS} from 'immutable'
 import {CHANGE_POST_DATA, CHANGE_POST_DATA_FAIL} from "../actions/post";
 
 const defaultState = fromJS({
+    isLoading: true,
     valid: false,
     postTime: '',
     photoList: [],
@@ -13,6 +14,7 @@ export default (state = defaultState, action) => {
     switch (action.type) {
         case CHANGE_POST_DATA:
             return state.merge({
+                isLoading: false,
                 valid: true,
                 postTime: action.post.post_time,
                 photoList: action.post.img_urls,
@@ -20,7 +22,10 @@ export default (state = defaultState, action) => {
                 userId: action.post.user_id,
             })
         case CHANGE_POST_DATA_FAIL:
-            return state.set('valid', false);
+            return state.merge({
+                isLoading: false,
+                valid: false,
+            })
         default:
             return state;
     }

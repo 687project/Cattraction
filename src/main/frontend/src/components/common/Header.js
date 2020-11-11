@@ -11,7 +11,6 @@ import Container from "@material-ui/core/Container";
 import {connect} from "react-redux";
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import * as homeActions from "../../actions/home";
 import * as authActions from "../../actions/auth";
 import Link from "@material-ui/core/Link";
 import {Link as RouterLink} from "react-router-dom";
@@ -68,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     accountMenu: {
         justifyContent: 'space-between',
         '& Button': {
-            marginRight: "5px",
+            margin: "0 5px",
         }
     },
 }));
@@ -106,26 +105,43 @@ function Header(props) {
                         <Link to={"/home"} underline="none" component={RouterLink}>
                             <Button
                                 variant="outlined"
-                                color="secondary"
-                                startIcon={<HomeRoundedIcon style={{color: '#f73378'}}/>}
+                                color="primary"
+                                startIcon={<HomeRoundedIcon style={{color: "primary"}}/>}
                             >
                                 Home
                             </Button>
                         </Link>
                         {
-                            props.login ? <Button variant="text" color="default" onClick={props.handleLogout}>Logout</Button> :
+                            props.isLogin ?
+                                <Button variant="text" color="default" onClick={props.handleLogout}>Logout</Button> :
                                 <Fragment>
-                                    <Button variant="text" color="primary" onClick={props.handleClickOpen}>Log In</Button>
+                                    <Button variant="text" color="primary" onClick={props.handleClickOpen}>Log
+                                        In</Button>
                                     <Button variant="text" color="default" href="/signup">Sign Up</Button>
                                 </Fragment>
                         }
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            startIcon={<CreateRoundedIcon style={{color: '#f73378'}}/>}
-                        >
-                            Post
-                        </Button>
+                        {
+                            props.isLogin ?
+                                <Link to="/" underline="none">
+                                    <Button
+                                        href="/newpost"
+                                        variant="outlined"
+                                        color="primary"
+                                        startIcon={<CreateRoundedIcon style={{color: "primary"}}/>}
+                                    >
+                                        Post
+                                    </Button>
+                                </Link>
+                                :
+                                <Button
+                                    onClick={props.handleClickOpen}
+                                    variant="outlined"
+                                    color="primary"
+                                    startIcon={<CreateRoundedIcon style={{color: "primary"}}/>}
+                                >
+                                    Post
+                                </Button>
+                        }
                     </div>
                 </Toolbar>
             </Container>
@@ -134,8 +150,8 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => ({
-    login: state.getIn(['auth', 'login']),
-    open: state.getIn(['auth', 'open']),
+    isLogin: state.getIn(['auth', 'isLogin']),
+    isLoginDialogVisible: state.getIn(['auth', 'isLoginDialogVisible']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
