@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from "axios";
 
 function Copyright() {
     return (
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(3),
     },
     submit: {
@@ -40,8 +41,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
     const classes = useStyles();
+
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+
+    const handleSignUp = () => {
+        axios.get('/api/auth/signup.json', {
+            params: {
+                email: email,
+                password: password
+            }
+        }).then(res => {
+            if (res.data.code === 200) {
+                props.history.push('/home');
+                localStorage.setItem('token', res.data.token);
+            } else {
+                alert(res.data.message)
+            }
+        })
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -56,6 +76,7 @@ export default function SignUp() {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
+                                value={email}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -63,10 +84,13 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                autoFocus
+                                onChange={ e => setEmail(e.target.value) }
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                value={password}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -75,15 +99,16 @@ export default function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={ e => setPassword(e.target.value) }
                             />
                         </Grid>
                     </Grid>
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSignUp}
                     >
                         Sign Up
                     </Button>

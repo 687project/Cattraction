@@ -1,5 +1,5 @@
 import Container from "@material-ui/core/Container";
-import React from "react";
+import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import {Redirect} from "react-router-dom";
@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,6 +30,26 @@ const useStyles = makeStyles((theme) => ({
 function CreatePost(props) {
     const classes = useStyles();
 
+    const [photos, setPhotos] = useState('')
+    const [description, setDescription] = useState('')
+
+    const handleSubmit = () => {
+        axios({
+            method: 'post',
+            url: '/api/posts/newpost',
+            data: {
+                photos,
+                description
+            },
+        }).then(res => {
+            alert(res.data);
+        })
+    }
+
+    if (!props.loginStatus) {
+        return <Redirect to="/login"/>
+    }
+
     return (
         <React.Fragment>
             <Container maxWidth="lg" className={classes.container}>
@@ -46,6 +67,7 @@ function CreatePost(props) {
                             id="contained-button-file"
                             multiple
                             type="file"
+                            onChange={e => setPhotos(e.target.value)}
                         />
                         <label htmlFor="contained-button-file">
                             <Button variant="contained" color="primary" component="span">
@@ -66,19 +88,20 @@ function CreatePost(props) {
                             rows={4}
                             fullWidth
                             multiline
+                            onChange={e => setDescription(e.target.value)}
                         />
                     </Grid>
                 </Grid>
             </Container>
             <div className={classes.submitDiv}>
-                <Button variant="contained" color="primary">Submit</Button>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>Submit</Button>
             </div>
         </React.Fragment>
     )
 }
 
 const mapStatesToProps = (state) => ({
-    isLogin: state.getIn(['auth', 'isLogin']),
+    loginStatus: state.getIn(['auth', 'loginStatus']),
 })
 
 const mapDispatchToProps = (dispatch) => ({})

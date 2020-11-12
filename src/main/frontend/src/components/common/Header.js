@@ -14,6 +14,7 @@ import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import * as authActions from "../../actions/auth";
 import Link from "@material-ui/core/Link";
 import {Link as RouterLink} from "react-router-dom";
+import {Router} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -74,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props) {
     const classes = useStyles();
+
     return (
         <AppBar
             position="static"
@@ -83,7 +85,7 @@ function Header(props) {
         >
             <Container maxWidth="lg">
                 <Toolbar className={classes.toolbar}>
-                    <a href="/" className={classes.logo}>
+                    <a href="#" className={classes.logo}>
                         <img src={logo} alt="Nav Logo" className={classes.logoImg}/>
                     </a>
                     <div className={classes.search}>
@@ -102,7 +104,7 @@ function Header(props) {
                     <div style={{margin: '0 auto'}}>
                     </div>
                     <div className={classes.accountMenu}>
-                        <Link to={"/home"} underline="none" component={RouterLink}>
+                        <Link to="/home" underline="none" component={RouterLink}>
                             <Button
                                 variant="outlined"
                                 color="primary"
@@ -112,36 +114,26 @@ function Header(props) {
                             </Button>
                         </Link>
                         {
-                            props.isLogin ?
+                            props.loginStatus ?
                                 <Button variant="text" color="default" onClick={props.handleLogout}>Logout</Button> :
                                 <Fragment>
-                                    <Button variant="text" color="primary" onClick={props.handleClickOpen}>Log
-                                        In</Button>
-                                    <Button variant="text" color="default" href="/signup">Sign Up</Button>
+                                    <Link to="/login" underline="none" component={RouterLink}>
+                                        <Button variant="text" color="primary">Log In</Button>
+                                    </Link>
+                                    <Link to="/signup" underline="none" component={RouterLink}>
+                                        <Button variant="text" color="default">Sign Up</Button>
+                                    </Link>
                                 </Fragment>
                         }
-                        {
-                            props.isLogin ?
-                                <Link to="/" underline="none">
-                                    <Button
-                                        href="/newpost"
-                                        variant="outlined"
-                                        color="primary"
-                                        startIcon={<CreateRoundedIcon style={{color: "primary"}}/>}
-                                    >
-                                        Post
-                                    </Button>
-                                </Link>
-                                :
-                                <Button
-                                    onClick={props.handleClickOpen}
-                                    variant="outlined"
-                                    color="primary"
-                                    startIcon={<CreateRoundedIcon style={{color: "primary"}}/>}
-                                >
-                                    Post
-                                </Button>
-                        }
+                        <Link to="/newpost" underline="none" component={RouterLink}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                startIcon={<CreateRoundedIcon style={{color: "primary"}}/>}
+                            >
+                                Post
+                            </Button>
+                        </Link>
                     </div>
                 </Toolbar>
             </Container>
@@ -150,16 +142,13 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => ({
-    isLogin: state.getIn(['auth', 'isLogin']),
-    isLoginDialogVisible: state.getIn(['auth', 'isLoginDialogVisible']),
+    loginStatus: state.getIn(['auth', 'loginStatus']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    handleClickOpen() {
-        const action = authActions.openLogin();
-        dispatch(action);
-    },
     handleLogout() {
+        localStorage.removeItem('token');
+        // ownProps.history.push('/home');
         const action = authActions.logout();
         dispatch(action);
     }

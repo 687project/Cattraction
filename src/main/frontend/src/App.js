@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./components/Home";
 import Post from "./components/Post";
 import SignUp from "./components/Auth/SignUp";
-import Login from "./components/Auth/Login";
+import Login from "./components/Login";
 import User from "./components/User";
 import Header from "./components/common/Header";
 import CreatePost from "./components/CreatePost";
@@ -41,9 +41,9 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            < Login />
             <BrowserRouter>
                 <Switch>
+                    <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={SignUp}/>
                     <Route path="/" render={() => LayoutRouter} />
                 </Switch>
