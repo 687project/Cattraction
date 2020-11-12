@@ -5,9 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -24,26 +27,40 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-    }
+    },
+    imgGrid: {
+        position: 'relative',
+        display: 'block',
+    },
+    deleteBtn: {
+        position: 'absolute',
+        right: '50%',
+    },
 }));
 
 function CreatePost(props) {
     const classes = useStyles();
 
-    const [photos, setPhotos] = useState('')
+    const [photos, setPhotos] = useState([])
     const [description, setDescription] = useState('')
 
     const handleSubmit = () => {
-        axios({
-            method: 'post',
-            url: '/api/posts/newpost',
-            data: {
-                photos,
-                description
-            },
-        }).then(res => {
-            alert(res.data);
+        const form = new FormData();
+        form.append(photos);
+        form.append(description);
+        return axios.post(
+            "/api/newpost",
+            form,
+            {
+                headers: {'Content-Type': 'multipart/form-data'},
+            }
+        ).then(res => {
+            console.log(res);
         })
+    }
+
+    const handleDeletePhoto = (index) => {
+        setPhotos(photos.splice(index, 1));
     }
 
     if (!props.loginStatus) {
@@ -59,7 +76,7 @@ function CreatePost(props) {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom>
-                            Upload Your photo of cat
+                            Upload Your cat photos
                         </Typography>
                         <input
                             accept="image/*"
@@ -67,8 +84,32 @@ function CreatePost(props) {
                             id="contained-button-file"
                             multiple
                             type="file"
-                            onChange={e => setPhotos(e.target.value)}
+                            value=""
+                            onChange={e => {
+                                setPhotos([...photos, e.target.files[0]])
+                            }}
                         />
+                        <Grid container>
+                            {
+                                photos.map((photo, index) => (
+                                    <Grid item xs={12} className={classes.imgGrid}>
+                                        <img
+                                            key={Date.now()}
+                                            src={URL.createObjectURL(photo)}
+                                            alt="preview"
+                                            style={{width: "50%"}}
+                                        />
+                                        <IconButton
+                                            className={classes.deleteBtn}
+                                            variant="outlined"
+                                            onClick={() => handleDeletePhoto(index)}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </Grid>
+                                ))
+                            }
+                        </Grid>
                         <label htmlFor="contained-button-file">
                             <Button variant="contained" color="primary" component="span">
                                 Upload Image
@@ -104,6 +145,4 @@ const mapStatesToProps = (state) => ({
     loginStatus: state.getIn(['auth', 'loginStatus']),
 })
 
-const mapDispatchToProps = (dispatch) => ({})
-
-export default connect(mapStatesToProps, mapDispatchToProps)(CreatePost)
+export default connect(mapStatesToProps, null)(CreatePost)
