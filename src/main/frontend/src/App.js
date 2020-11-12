@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./components/Home";
 import Post from "./components/Post";
 import SignUp from "./components/Auth/SignUp";
-import Login from "./components/Login";
+import Login from "./components/Auth/Login";
 import User from "./components/User";
 import Header from "./components/common/Header";
 import CreatePost from "./components/CreatePost";
