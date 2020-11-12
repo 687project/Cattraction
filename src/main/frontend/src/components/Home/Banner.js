@@ -29,15 +29,18 @@ export default function Banner(props) {
         },
         {
             img: "https://images.unsplash.com/photo-1601758174039-617983b8cdd9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
+        },
+        {
+            img: "https://source.unsplash.com/random",
         }
     ]
 
     return (
         <Carousel
-            interval={8000}
+            interval={3000}
             className={classes.carousel}
             indicatorContainerProps={{className: classes.carouselIndicator}}
-            autoPlay={false}
+            autoPlay={true}
         >
             {
                 items.map((item, i) => <Item key={i} item={item}/>)
