@@ -1,5 +1,7 @@
-package com.cattraction.demo.posts;
+package com.cattraction.demo.controllers;
 
+import com.cattraction.demo.services.PostService;
+import com.cattraction.demo.domains.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

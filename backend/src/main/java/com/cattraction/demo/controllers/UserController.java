@@ -1,5 +1,7 @@
-package com.cattraction.demo.profile;
+package com.cattraction.demo.controllers;
 
+import com.cattraction.demo.domains.User;
+import com.cattraction.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +13,25 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/v1/user-profile")
 @CrossOrigin("*")
-public class UserProfileController {
+public class UserController {
 
-    private final UserProfileService userProfileService;
+    private final UserService userService;
 
     @Autowired
-    public UserProfileController(UserProfileService userProfileService) {
-        this.userProfileService = userProfileService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<UserProfile> getUserProfiles(){
-        return userProfileService.getUserProfiles();
+    public List<User> getUsers(){
+        return userService.getUsers("aaa");
+    }
+
+    //@GetMapping
+    public String index() {
+        userService.signUp("aaa","bbb", "ccc");
+        //return this.Login("www").getId();
+        return "hello";
     }
 
     @PostMapping(
@@ -32,6 +41,6 @@ public class UserProfileController {
     )
     public void uploadUserProfileImage(@PathVariable("userProfileId") UUID userProfileId,
                                        @RequestParam("file") MultipartFile file){
-        userProfileService.uploadUserProfileImage(userProfileId, file);
+        userService.uploadUserProfileImage(userProfileId, file);
     }
 }

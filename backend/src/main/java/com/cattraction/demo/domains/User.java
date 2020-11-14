@@ -1,29 +1,30 @@
-package com.cattraction.demo.profile;
+package com.cattraction.demo.domains;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class UserProfile {
+public class User {
 
-    private UUID userProfileId;
+    private UUID userId;
     private String username;
     private String email;
     private String password;
-    private String userProfileImageLink; // s3 key
+    private String userImageLink; // s3 key
 
-    public UserProfile(UUID userProfileId, String username, String userProfileImageLink) {
-        this.userProfileId = userProfileId;
+    public User(UUID userId, String email, String username, String password) {
+        this.userId = userId;
+        this.email = email;
         this.username = username;
-        this.userProfileImageLink = userProfileImageLink;
+        this.password = password;
     }
 
-    public UUID getUserProfileId() {
-        return userProfileId;
+    public UUID getuserId() {
+        return userId;
     }
 
-    public void setUserProfileId(UUID userProfileId) {
-        this.userProfileId = userProfileId;
+    public void setuserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -34,12 +35,12 @@ public class UserProfile {
         this.username = username;
     }
 
-    public Optional<String> getUserProfileImageLink() {
-        return Optional.ofNullable(userProfileImageLink);
+    public Optional<String> getuserImageLink() {
+        return Optional.ofNullable(userImageLink);
     }
 
-    public void setUserProfileImageLink(String userProfileImageLink) {
-        this.userProfileImageLink = userProfileImageLink;
+    public void setuserImageLink(String userImageLink) {
+        this.userImageLink = userImageLink;
     }
 
     public String getEmail() {
@@ -62,16 +63,16 @@ public class UserProfile {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserProfile that = (UserProfile) o;
-        return userProfileId.equals(that.userProfileId) &&
+        User that = (User) o;
+        return userId.equals(that.userId) &&
                 username.equals(that.username) &&
                 email.equals(that.email) &&
                 password.equals(that.password) &&
-                userProfileImageLink.equals(that.userProfileImageLink);
+                userImageLink.equals(that.userImageLink);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userProfileId, username, email, password, userProfileImageLink);
+        return Objects.hash(userId, username, email, password, userImageLink);
     }
 }

@@ -1,5 +1,7 @@
-package com.cattraction.demo.posts;
+package com.cattraction.demo.services;
 
+import com.cattraction.demo.dataAccessObjects.PostDataAccessSerivice;
+import com.cattraction.demo.domains.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

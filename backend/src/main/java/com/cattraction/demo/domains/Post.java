@@ -1,4 +1,4 @@
-package com.cattraction.demo.posts;
+package com.cattraction.demo.domains;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -1,8 +1,6 @@
 package com.cattraction.demo.datastore;
 
-import com.cattraction.demo.posts.Post;
-import com.cattraction.demo.profile.UserProfile;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.cattraction.demo.domains.Post;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
