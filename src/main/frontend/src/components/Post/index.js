@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import * as actions from "../../actions/post";
 import {connect} from "react-redux";
 import NotFound from "../common/NotFound";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -45,7 +46,12 @@ const mapStatesToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getPost(id) {
-        dispatch(actions.getPostContent(id));
+        dispatch(actions.clearContentData());
+        axios.get(`/api/posts/${id}.json`)
+            .then((res) => {
+                const result = res.data;
+                dispatch(actions.changHomeContentData(result));
+            });
     }
 })
 

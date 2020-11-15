@@ -60,7 +60,9 @@ function CreatePost(props) {
     }
 
     const handleDeletePhoto = (index) => {
-        setPhotos(photos.splice(index, 1));
+        const newPhotos = [...photos];
+        newPhotos.splice(index, 1);
+        setPhotos(newPhotos);
     }
 
     if (!props.loginStatus) {
@@ -86,15 +88,16 @@ function CreatePost(props) {
                             type="file"
                             value=""
                             onChange={e => {
+                                console.log(e.target.files[0])
                                 setPhotos([...photos, e.target.files[0]])
+                                console.log(photos);
                             }}
                         />
                         <Grid container>
                             {
                                 photos.map((photo, index) => (
-                                    <Grid item xs={12} className={classes.imgGrid}>
+                                    <Grid item xs={12} className={classes.imgGrid} key={index}>
                                         <img
-                                            key={Date.now()}
                                             src={URL.createObjectURL(photo)}
                                             alt="preview"
                                             style={{width: "50%"}}
