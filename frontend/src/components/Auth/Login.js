@@ -141,20 +141,22 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     handleSubmit(email, password) {
-        axios.get('/api/auth/login.json', {
-            params: {
-                email: email,
-                password: password
-            }
-        }).then(res => {
+      axios({
+        method: 'post',
+        url:'http://localhost:8080/api/v1/user-profile/login',
+        params:{  email: email,password: password}
+      }).then(res => {
             // if (res.data.code === 200) {
             //     localStorage.setItem('token', res.data.token);
             //     dispatch(authenticateUser(res.data.user));
             // } else {
             //     alert(res.data.message);
             // }
-            localStorage.setItem('token', res.data.token);
-            dispatch(authenticateUser(res.data.user));
+            //localStorage.setItem('token', res.data.token);
+            //dispatch(authenticateUser(res.data.user));
+            if(res.data["email"]==null)alert("No such user!")
+            else if(password==res.data["password"])alert("log in successfully!")
+            else alert("wrong password!")
             console.log(res.data);
         })
     },

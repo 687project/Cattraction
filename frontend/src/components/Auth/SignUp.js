@@ -48,18 +48,23 @@ export default function SignUp(props) {
     const [ password, setPassword ] = useState('');
 
     const handleSignUp = () => {
-        axios.get('/api/auth/signup.json', {
-            params: {
-                email: email,
-                password: password
-            }
+        axios({
+          method: 'post',
+          url:'http://localhost:8080/api/v1/user-profile/signup',
+          params:{  email: email,password: password}
         }).then(res => {
-            if (res.data.code === 200) {
+            /*if (res.data.code === 200) {
                 props.history.push('/home');
                 localStorage.setItem('token', res.data.token);
             } else {
                 alert(res.data.message)
-            }
+            }*/
+            if(res.data)alert("Sign up successfully!")
+            else alert("user exists!")
+        })
+        .catch(error => {
+            //alert(email)
+            console.log(error.response)
         })
     }
 

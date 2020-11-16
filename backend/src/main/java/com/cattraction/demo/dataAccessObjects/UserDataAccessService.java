@@ -18,11 +18,19 @@ public class UserDataAccessService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getUsers(String email){
+    public List<User> getallUsers(String email){
         return  userRepository.findAllByEmail(email);
+    }
+
+    public User getUser(String email){
+        return  userRepository.findByEmail(email);
     }
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public void deleteUser(String email) {
+        userRepository.deleteByEmail(email);
     }
 }

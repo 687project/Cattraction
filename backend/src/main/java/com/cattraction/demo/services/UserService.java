@@ -19,18 +19,32 @@ public class UserService {
         this.userDataAccessService = userDataAccessService;
     }
 
-    public List<User> getUsers(String email){
-        return userDataAccessService.getUsers(email);
+    public List<User> getallUsers(String email){
+        return userDataAccessService.getallUsers(email);
+    }
+
+    public User getUser(String email){
+        return userDataAccessService.getUser(email);
     }
 
     private void saveUser(User user){
         userDataAccessService.saveUser(user);
     }
 
+    public void deleteUser(String email){
+        userDataAccessService.deleteUser(email);
+    }
+
     public boolean signUp(String email, String username, String password){
-        User user = new User(UUID.randomUUID(), email, username, password);
-        saveUser(user);
-        return true;
+        boolean status=true;
+        User userExists = userDataAccessService.getUser(email);
+        if (userExists!=null) status=false;
+        else{
+          User user = new User(UUID.randomUUID(), email, username, password);
+          saveUser(user);
+        }
+
+        return status;
     }
 
     public void uploadUserProfileImage(UUID userProfileId, MultipartFile file) {
