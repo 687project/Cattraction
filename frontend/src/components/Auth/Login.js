@@ -146,18 +146,23 @@ const mapDispatchToProps = (dispatch) => ({
         url:'http://localhost:8080/api/v1/user-profile/login',
         params:{  email: email,password: password}
       }).then(res => {
-            // if (res.data.code === 200) {
-            //     localStorage.setItem('token', res.data.token);
-            //     dispatch(authenticateUser(res.data.user));
-            // } else {
-            //     alert(res.data.message);
-            // }
-            //localStorage.setItem('token', res.data.token);
-            //dispatch(authenticateUser(res.data.user));
+             /*if (res.data.code === 200) {
+               alert("bb")
+                 localStorage.setItem('token', res.data.token);
+                dispatch(authenticateUser(res.data.user));
+             } else {
+                alert(res.data.message);
+            }
+
+            */
             if(res.data["email"]==null)alert("No such user!")
-            else if(password==res.data["password"])alert("log in successfully!")
-            else alert("wrong password!")
-            console.log(res.data);
+            else if(password!=res.data["password"])alert("wrong password!")
+            else {
+              alert("log in successfully!")
+              localStorage.setItem('token', res.data.token)
+              dispatch(authenticateUser(res.data.user))
+            }
+
         })
     },
 })

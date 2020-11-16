@@ -59,7 +59,11 @@ export default function SignUp(props) {
             } else {
                 alert(res.data.message)
             }*/
-            if(res.data)alert("Sign up successfully!")
+            if(res.data){
+              alert("Sign up successfully!")
+              props.history.push('/home')
+              localStorage.setItem('token', res.data.token)
+            }
             else alert("user exists!")
         })
         .catch(error => {
