@@ -46,8 +46,8 @@ function CreatePost(props) {
 
     const handleSubmit = () => {
         const form = new FormData();
-        form.append(photos);
-        form.append(description);
+        form.append('photos', photos);
+        form.append('description', description);
         return axios.post(
             "/api/newpost",
             form,
