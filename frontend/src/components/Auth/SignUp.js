@@ -61,7 +61,7 @@ export default function SignUp(props) {
     const handleSignUp = () => {
         axios({
             method: 'post',
-            url: 'http://localhost:8080/api/v1/user-profile/signup',
+            url: localStorage.getItem("ip")+'/api/v1/user-profile/signup',
             params: {email: email, password: password}
         }).then(res => {
             if (res.data) {

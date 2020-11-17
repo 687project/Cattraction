@@ -1,18 +1,21 @@
 package com.cattraction.demo.domains;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Post {
 
     private UUID postId;
-    private String postName;
-    private String postUrl;
+    private String postDesc;
+    private List<String> postUrl;
+    private String creater;
 
-    public Post(UUID postId, String postName, String postUrl) {
+    public Post(UUID postId, String postDesc, List<String> postUrl, String creater) {
         this.postId = postId;
-        this.postName = postName;
+        this.postDesc = postDesc;
         this.postUrl = postUrl;
+        this.creater = creater;
     }
 
     @Override
@@ -21,13 +24,14 @@ public class Post {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return postId.equals(post.postId) &&
-                postName.equals(post.postName) &&
-                postUrl.equals(post.postUrl);
+                Objects.equals(postDesc, post.postDesc) &&
+                postUrl.equals(post.postUrl) &&
+                creater.equals(post.creater);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(postId, postName, postUrl);
+        return Objects.hash(postId, postDesc, postUrl, creater);
     }
 
     public UUID getPostId() {
@@ -38,19 +42,27 @@ public class Post {
         this.postId = postId;
     }
 
-    public String getPostName() {
-        return postName;
+    public String getPostDesc() {
+        return postDesc;
     }
 
-    public void setPostName(String postName) {
-        this.postName = postName;
+    public void setPostDesc(String postDesc) {
+        this.postDesc = postDesc;
     }
 
-    public String getPostUrl() {
+    public List<String> getPostUrl() {
         return postUrl;
     }
 
-    public void setPostUrl(String postUrl) {
+    public void setPostUrl(List<String> postUrl) {
         this.postUrl = postUrl;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
     }
 }

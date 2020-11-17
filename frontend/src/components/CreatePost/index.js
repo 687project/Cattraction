@@ -46,10 +46,12 @@ function CreatePost(props) {
 
     const handleSubmit = () => {
         const form = new FormData();
-        form.append('photos', photos);
+        for(let i in photos){
+            form.append('photos', photos[i]);
+        }
         form.append('description', description);
         return axios.post(
-            "/api/newpost",
+            localStorage.getItem("ip")+"/api/v1/user-profile/newpost",
             form,
             {
                 headers: {'Content-Type': 'multipart/form-data'},

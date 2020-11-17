@@ -22,8 +22,10 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping
-    public List<Post> getPosts(){
-        return postService.getPosts();
+
+    public Post getPosts(String postId){
+        return postService.getPosts(postId);
     }
+
+
 }

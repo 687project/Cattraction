@@ -134,9 +134,11 @@ function Header(props) {
                                       </Button>
                                   </Link>
 
+                                  <Link to="/home" underline="none" component={RouterLink}>
                                     <Button onClick={props.handleLogout} variant="outlined" color="primary" startIcon={<ExitToAppIcon style={{color: "primary"}}/>}>
                                         Logout
                                     </Button>
+                                  </Link>
                                 </Fragment> :
 
                                 <Fragment>

@@ -5,10 +5,13 @@ import com.cattraction.demo.domains.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
-public class PostService {
+public class PostService{
 
     private PostDataAccessSerivice postDataAccessSerivice;
 
@@ -17,7 +20,21 @@ public class PostService {
         this.postDataAccessSerivice = postDataAccessSerivice;
     }
 
-    public List<Post> getPosts(){
-        return postDataAccessSerivice.getPostData();
+    public Map<String, Object> createPost(String creater, List<String> postUrl, String description){
+        UUID id = UUID.randomUUID();
+        Post post = new Post(id, description, postUrl, creater);
+        postDataAccessSerivice.savePost(post);
+
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("postId", id);
+        metadata.put("creater", creater);
+        metadata.put("description", description);
+        metadata.put("postUrls", postUrl);
+
+        return metadata;
+    }
+
+    public Post getPosts(String postId){
+        return postDataAccessSerivice.getPost(postId);
     }
 }

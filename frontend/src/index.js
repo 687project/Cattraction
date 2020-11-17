@@ -7,6 +7,9 @@ import rootReducer from "./reducers"
 import {Provider} from "react-redux";
 import {AUTHENTICATE_USER} from "./actions/auth";
 
+localStorage.setItem("ip",'http://216.171.38.35:8080')
+//localStorage.setItem("ip",'http://localhost:8080')
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
