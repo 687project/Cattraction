@@ -3,7 +3,6 @@ import {CHANGE_POST_DATA, CLEAR_POST_DATA} from "../actions/post";
 
 const defaultState = fromJS({
     isLoading: true,
-    valid: false,
     postTime: '',
     photoList: [],
     description: '',
@@ -15,7 +14,6 @@ export default (state = defaultState, action) => {
         case CHANGE_POST_DATA:
             return state.merge({
                 isLoading: false,
-                valid: true,
                 postTime: action.post.post_time,
                 photoList: action.post.img_urls,
                 description: action.post.description,
@@ -24,7 +22,6 @@ export default (state = defaultState, action) => {
         case CLEAR_POST_DATA:
             return state.merge({
                 isLoading: true,
-                valid: false,
                 postTime: '',
                 photoList: [],
                 description: '',

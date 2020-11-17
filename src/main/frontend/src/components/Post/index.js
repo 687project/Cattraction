@@ -7,8 +7,8 @@ import Sidebar from "./Sidebar";
 import {useParams} from "react-router-dom";
 import * as actions from "../../actions/post";
 import {connect} from "react-redux";
-import NotFound from "../common/NotFound";
 import axios from "axios";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -24,7 +24,7 @@ function Post(props) {
         props.getPost(id);
     }, []);
 
-    if (props.valid) {
+    if (!props.isLoading) {
         return (
             <Container maxWidth="lg">
                 <Grid container spacing={5} className={classes.mainGrid}>
@@ -35,13 +35,13 @@ function Post(props) {
         )
     } else {
         return (
-            <NotFound/>
+            <LinearProgress />
         )
     }
 }
 
 const mapStatesToProps = (state) => ({
-    valid: state.getIn(['post', 'valid']),
+    isLoading: state.getIn(['post', 'isLoading']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
