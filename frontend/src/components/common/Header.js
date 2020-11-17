@@ -130,9 +130,7 @@ function Header(props) {
                                 <Fragment>
                                   <Link to="/login" underline="none" component={RouterLink}>
                                       <Button variant="outlined" color="primary" startIcon={<AccountCircleIcon style={{color: "primary"}}/>}>
-
-                                          {localStorage.getItem("user")}
-
+                                          MyAccount
                                       </Button>
                                   </Link>
 
