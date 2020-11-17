@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ContentItem(props) {
     const classes = useStyles();
     const {postId, coverUrl, user} = props;
-    const {id, username, avatarUrl} = user;
+    const {username, avatarUrl} = user;
 
     return (
         <div className={classes.itemContainer}>

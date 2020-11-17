@@ -10,7 +10,7 @@ export const CHANGE_HOME_CONTENT_DATA = 'Home/change_home_content_data';
  * action creators
  */
 
-const changHomeContentData = (result) => ({
+export const changHomeContentData = (result) => ({
     type: CHANGE_HOME_CONTENT_DATA,
     postList: result,
 });

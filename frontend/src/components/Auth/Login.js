@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -7,14 +6,14 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import background from '../../statics/login_background.jpeg'
+import background from '../../statics/login_sidepic.jpg'
+import logoSmall from '../../statics/logoSmall.jpeg'
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {authenticateUser} from "../../actions/auth";
+import * as actions from "../../actions/auth";
 
 function Copyright() {
     return (
@@ -41,6 +40,19 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     },
+    imageLogoSmall: {
+        backgroundRepeat: 'no-repeat',
+        backgroundColor:
+            theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        borderRadius: '50%',
+        width: '80px',
+    },
+    welcomeTitle: {
+        color: '#595959',
+        // fontFamily: 'Comic Sans MS',
+    },
     paper: {
         margin: theme.spacing(8, 4),
         display: 'flex',
@@ -60,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 function SignInSide(props) {
     const classes = useStyles();
 
@@ -76,12 +89,12 @@ function SignInSide(props) {
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
+                    <img src={logoSmall} alt="Avatar" className={classes.imageLogoSmall} />
+                    <Typography component="h0" variant="h4">
+                        <br></br>
+                        <b className={classes.welcomeTitle}>Welcome to Cattraction</b>
                     </Typography>
+
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
@@ -89,9 +102,11 @@ function SignInSide(props) {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
+                            error={props.emailError !== ''}
+                            helperText={props.emailError}
                             autoFocus
                             onChange={ e => setEmail(e.target.value) }
                         />
@@ -105,23 +120,24 @@ function SignInSide(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            error={props.passwordError !== ''}
+                            helperText={props.passwordError}
                             onChange={ e => setPassword(e.target.value) }
                         />
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
                             className={classes.submit}
                             onClick={ e => props.handleSubmit(email, password)}
                         >
-                            Sign In
+                            LOG IN
                         </Button>
                         <Grid container>
                             <Grid item xs />
                             <Grid item>
                                 <Link href="/signup" variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {"Not on Cattraction yet? Sign up"}
                                 </Link>
                             </Grid>
                         </Grid>
@@ -137,32 +153,32 @@ function SignInSide(props) {
 
 const mapStateToProps = (state) => ({
     loginStatus: state.getIn(['auth', 'loginStatus']),
+    emailError: state.getIn(['auth', 'emailError']),
+    passwordError: state.getIn(['auth', 'passwordError']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
     handleSubmit(email, password) {
-      axios({
-        method: 'post',
-        url:'http://localhost:8080/api/v1/user-profile/login',
-        params:{  email: email,password: password}
-      }).then(res => {
-             /*if (res.data.code === 200) {
-               alert("bb")
-                 localStorage.setItem('token', res.data.token);
-                dispatch(authenticateUser(res.data.user));
-             } else {
-                alert(res.data.message);
+        axios({
+            method: 'post',
+            url:'http://localhost:8080/api/v1/user-profile/login',
+            params:{  email: email,password: password}
+        }).then(res => {
+            if(res.data["email"] == null) {
+                dispatch(actions.emailError("No such user!"))
+                // alert("No such user!")
             }
-
-            */
-            if(res.data["email"]==null)alert("No such user!")
-            else if(password!=res.data["password"])alert("wrong password!")
+            else if(password !== res.data["password"]) {
+                dispatch(actions.passwordError("wrong password!"))
+                // alert("wrong password!")
+            }
             else {
-              alert("log in successfully!")
-              localStorage.setItem('token', res.data.token)
-              dispatch(authenticateUser(res.data.user))
+                alert("log in successfully!")
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('email', res.data["email"])
+                dispatch(actions.authenticateUser(res.data.user))
             }
-
+            console.log(res.data);
         })
     },
 })

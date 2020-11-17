@@ -10,6 +10,7 @@ import {
     Route,
     useRouteMatch, Redirect
 } from "react-router-dom";
+import axios from "axios";
 
 const sections = [
     {
@@ -57,16 +58,20 @@ function Home(props) {
                         </Route>
                     ))
                 }
-                <Redirect from="/" to="/t/recommendation" />
+                <Redirect from="/" to="/t/recommendation"/>
             </Switch>
         </Container>
     )
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    changeHomeContentData(path) {
-        const action = actions.getHomeContent(path);
-        dispatch(action);
+    changeHomeContentData(topic = 'daily-feed') {
+        axios.get(`/api/posts/t/${topic}.json`).then((res) => {
+            const result = res.data;
+            dispatch(actions.changHomeContentData(result));
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 })
 

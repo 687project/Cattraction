@@ -3,11 +3,10 @@ import {CHANGE_POST_DATA, CLEAR_POST_DATA} from "../actions/post";
 
 const defaultState = fromJS({
     isLoading: true,
-    valid: false,
     postTime: '',
     photoList: [],
     description: '',
-    userId: 0,
+    user: {},
 })
 
 export default (state = defaultState, action) => {
@@ -15,20 +14,18 @@ export default (state = defaultState, action) => {
         case CHANGE_POST_DATA:
             return state.merge({
                 isLoading: false,
-                valid: true,
                 postTime: action.post.post_time,
                 photoList: action.post.img_urls,
                 description: action.post.description,
-                userId: action.post.user_id,
+                user: action.post.user,
             })
         case CLEAR_POST_DATA:
             return state.merge({
                 isLoading: true,
-                valid: false,
                 postTime: '',
                 photoList: [],
                 description: '',
-                userId: 0,
+                user: {},
             });
         default:
             return state;

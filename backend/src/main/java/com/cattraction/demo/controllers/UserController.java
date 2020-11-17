@@ -26,12 +26,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    //@GetMapping
+    /*@GetMapping("/allUsers")
     public List<User> getUsers(){
         userService.deleteUser("aaa");
         List<User> gan=null;
         return gan;
         //return userService.getallUsers("aaa");
+    }*/
+
+    @PostMapping(value="/post",consumes = "multipart/form-data")
+    public void Post(@RequestParam("photo") List<MultipartFile> file) {
+        //MultipartFile f=MultipartFile( file.get("photo"));
+        //boolean status;
+        //status = userService.signUp("aaa","bbb", "ccc");
+        //return  userService.getUser(paramMap.get("email").toString());
+        //return "hello";
     }
 
     @PostMapping("/login")
