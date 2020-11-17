@@ -10,11 +10,13 @@ import {darken} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {connect} from "react-redux";
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
 import * as authActions from "../../actions/auth";
 import Link from "@material-ui/core/Link";
 import {Link as RouterLink} from "react-router-dom";
-import {Router} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -85,7 +87,7 @@ function Header(props) {
         >
             <Container maxWidth="lg">
                 <Toolbar className={classes.toolbar}>
-                    <a href="#" className={classes.logo}>
+                    <a href="/" className={classes.logo}>
                         <img src={logo} alt="Nav Logo" className={classes.logoImg}/>
                     </a>
                     <div className={classes.search}>
@@ -113,18 +115,6 @@ function Header(props) {
                                 Home
                             </Button>
                         </Link>
-                        {
-                            props.loginStatus ?
-                                <Button variant="text" color="default" onClick={props.handleLogout}>Logout</Button> :
-                                <Fragment>
-                                    <Link to="/login" underline="none" component={RouterLink}>
-                                        <Button variant="text" color="primary">Log In</Button>
-                                    </Link>
-                                    <Link to="/signup" underline="none" component={RouterLink}>
-                                        <Button variant="text" color="default">Sign Up</Button>
-                                    </Link>
-                                </Fragment>
-                        }
                         <Link to="/newpost" underline="none" component={RouterLink}>
                             <Button
                                 variant="outlined"
@@ -134,6 +124,35 @@ function Header(props) {
                                 Post
                             </Button>
                         </Link>
+
+                        {
+                            props.loginStatus ?
+                                // <Button variant="text" color="default" onClick={props.handleLogout}>
+                                <Button onClick={props.handleLogout} variant="outlined" color="primary" startIcon={<ExitToAppIcon style={{color: "primary"}}/>}>
+                                    Logout
+                                </Button> :
+
+                                <Fragment>
+
+                                    <Link to="/login" underline="none" component={RouterLink}>
+                                        {/* <Button variant="text" color="primary"> */}
+                                        <Button variant="outlined" color="primary" startIcon={<PersonIcon style={{color: "primary"}}/>}>
+                                            Log In
+                                        </Button>
+                                    </Link>
+
+                                    <Link to="/signup" underline="none" component={RouterLink}>
+                                        {/* <Button variant="text" color="default"> */}
+                                        <Button variant="outlined" color="primary" startIcon={<AccountCircleIcon style={{color: "primary"}}/>}>
+                                            Sign Up
+                                        </Button>
+                                    </Link>
+
+                                </Fragment>
+                        }
+
+
+
                     </div>
                 </Toolbar>
             </Container>
