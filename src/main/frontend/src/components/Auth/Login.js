@@ -13,7 +13,7 @@ import background from '../../statics/login_sidepic.jpg'
 import logoSmall from '../../statics/logoSmall.jpeg'
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {authenticateUser} from "../../actions/auth";
+import * as actions from "../../actions/auth";
 
 function Copyright() {
     return (
@@ -89,12 +89,7 @@ function SignInSide(props) {
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
-                    {/* <Avatar className={classes.avatar}> */}
-                    {/* <LockOutlinedIcon/> */}
-                    {/* </Avatar> */}
                     <img src={logoSmall} alt="Avatar" className={classes.imageLogoSmall} />
-
-
                     <Typography component="h0" variant="h4">
                         <br></br>
                         <b className={classes.welcomeTitle}>Welcome to Cattraction</b>
@@ -110,6 +105,8 @@ function SignInSide(props) {
                             label="Email"
                             name="email"
                             autoComplete="email"
+                            error={props.emailError !== ''}
+                            helperText={props.emailError}
                             autoFocus
                             onChange={ e => setEmail(e.target.value) }
                         />
@@ -123,10 +120,11 @@ function SignInSide(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            error={props.passwordError !== ''}
+                            helperText={props.passwordError}
                             onChange={ e => setPassword(e.target.value) }
                         />
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
@@ -155,6 +153,8 @@ function SignInSide(props) {
 
 const mapStateToProps = (state) => ({
     loginStatus: state.getIn(['auth', 'loginStatus']),
+    emailError: state.getIn(['auth', 'emailError']),
+    passwordError: state.getIn(['auth', 'passwordError']),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -164,12 +164,18 @@ const mapDispatchToProps = (dispatch) => ({
             url:'http://localhost:8080/api/v1/user-profile/login',
             params:{  email: email,password: password}
         }).then(res => {
-            if(res.data["email"]==null)alert("No such user!")
-            else if(password !== res.data["password"])alert("wrong password!")
+            if(res.data["email"] == null) {
+                dispatch(actions.emailError("No such user!"))
+                // alert("No such user!")
+            }
+            else if(password !== res.data["password"]) {
+                dispatch(actions.passwordError("wrong password!"))
+                // alert("wrong password!")
+            }
             else {
                 alert("log in successfully!")
                 localStorage.setItem('token', res.data.token)
-                dispatch(authenticateUser(res.data.user))
+                dispatch(actions.authenticateUser(res.data.user))
             }
             console.log(res.data);
         })
