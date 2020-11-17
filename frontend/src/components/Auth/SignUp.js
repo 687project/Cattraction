@@ -59,7 +59,6 @@ export default function SignUp(props) {
     const [ emailError, setEmailError ] = useState('');
 
     const handleSignUp = () => {
-        setEmailError("user exists!")
         axios({
             method: 'post',
             url: 'http://localhost:8080/api/v1/user-profile/signup',

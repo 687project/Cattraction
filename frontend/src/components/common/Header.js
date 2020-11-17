@@ -128,7 +128,7 @@ function Header(props) {
                         {
                             props.loginStatus ?
                                 <Fragment>
-                                  <Link to="/login" underline="none" component={RouterLink}>
+                                  <Link to="/myaccount" underline="none" component={RouterLink}>
                                       <Button variant="outlined" color="primary" startIcon={<AccountCircleIcon style={{color: "primary"}}/>}>
                                           MyAccount
                                       </Button>

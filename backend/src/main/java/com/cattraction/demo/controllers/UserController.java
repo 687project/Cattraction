@@ -34,26 +34,13 @@ public class UserController {
         //return userService.getallUsers("aaa");
     }*/
 
-    @PostMapping(value="/post",consumes = "multipart/form-data")
-    public void Post(@RequestParam("photo") List<MultipartFile> file) {
-        //MultipartFile f=MultipartFile( file.get("photo"));
-        //boolean status;
-        //status = userService.signUp("aaa","bbb", "ccc");
-        //return  userService.getUser(paramMap.get("email").toString());
-        //return "hello";
-    }
-
     @PostMapping("/login")
     public User Login(@RequestParam Map<String,Object> paramMap) {
-        //boolean status;
-        //status = userService.signUp("aaa","bbb", "ccc");
         return  userService.getUser(paramMap.get("email").toString());
-        //return "hello";
     }
 
-    @PostMapping("/signup") //(consumes = "application/json", produces = "application/json")
+    @PostMapping("/signup")
     public boolean SignUp(@RequestParam Map<String,Object> paramMap){
-        //if(paramMap==null)return "fuck";
         String email = paramMap.get("email").toString();
         String password = paramMap.get("password").toString();
         boolean status =userService.signUp(email,"my", password);

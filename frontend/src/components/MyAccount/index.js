@@ -24,20 +24,14 @@ function Post(props) {
         props.getPost(id);
     }, []);
 
-    if (!props.isLoading) {
-        return (
-            <Container maxWidth="lg">
-                <Grid container spacing={5} className={classes.mainGrid}>
-                    <Main/>
-                    <Sidebar/>
-                </Grid>
-            </Container>
-        )
-    } else {
-        return (
-            <LinearProgress />
-        )
-    }
+    return (
+        <Container maxWidth="lg">
+            <Grid container spacing={5} className={classes.mainGrid}>
+                <Main/>
+                <Sidebar/>
+            </Grid>
+        </Container>
+    )
 }
 
 const mapStatesToProps = (state) => ({
