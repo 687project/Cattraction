@@ -15,9 +15,11 @@ function Content(props) {
     const classes = useStyles();
     return (
         <div className={classes.contentWrapper}>
-            {props.posts.map((post) => (
-                <ContentItem key={post.postId} {...post} />
-            ))}
+            {
+                props.posts.map((post) => (
+                    <ContentItem key={post.postId} {...post} />
+                ))
+            }
         </div>
     );
 }

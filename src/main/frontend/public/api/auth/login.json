@@ -1,8 +1,4 @@
 {
-  "id": 1,
-  "username": "jack",
-  "avatarUrl": "https://p3-bcy.byteimg.com/img/banciyuan/Public/Upload/avatar/1216315/fb2f3c1cdd6d40f0ae059e761f83ecde/fat.jpg~tplv-banciyuan-abig.image",
-  "following": 10,
-  "followed": 30,
-  "signature": "I love dogs."
+  "email": "aaa",
+  "password": "aaa"
 }
