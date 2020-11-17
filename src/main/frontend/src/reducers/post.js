@@ -6,7 +6,7 @@ const defaultState = fromJS({
     postTime: '',
     photoList: [],
     description: '',
-    userId: 0,
+    user: {},
 })
 
 export default (state = defaultState, action) => {
@@ -17,7 +17,7 @@ export default (state = defaultState, action) => {
                 postTime: action.post.post_time,
                 photoList: action.post.img_urls,
                 description: action.post.description,
-                userId: action.post.user_id,
+                user: action.post.user,
             })
         case CLEAR_POST_DATA:
             return state.merge({
@@ -25,7 +25,7 @@ export default (state = defaultState, action) => {
                 postTime: '',
                 photoList: [],
                 description: '',
-                userId: 0,
+                user: {},
             });
         default:
             return state;
