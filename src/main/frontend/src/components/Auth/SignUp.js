@@ -56,8 +56,10 @@ export default function SignUp(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [ emailError, setEmailError ] = useState('');
 
     const handleSignUp = () => {
+        setEmailError("user exists!")
         axios({
             method: 'post',
             url: 'http://localhost:8080/api/v1/user-profile/signup',
@@ -65,9 +67,12 @@ export default function SignUp(props) {
         }).then(res => {
             if (res.data) {
                 alert("Sign up successfully!")
-                props.history.push('/home')
                 localStorage.setItem('token', res.data.token)
-            } else alert("user exists!")
+                props.history.push('/home')
+            } else {
+                // alert("user exists!")
+                setEmailError("user exists!")
+            }
         }).catch(error => {
             console.log(error.response)
         })
@@ -89,6 +94,8 @@ export default function SignUp(props) {
                         <Grid item xs={12}>
                             <TextField
                                 value={email}
+                                error={emailError !== ''}
+                                helperText={emailError}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -97,7 +104,10 @@ export default function SignUp(props) {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={e => {
+                                    setEmail(e.target.value);
+                                    setEmailError('');
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
