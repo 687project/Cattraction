@@ -45,6 +45,7 @@ function CreatePost(props) {
 
     const [photos, setPhotos] = useState([])
     const [description, setDescription] = useState('')
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = () => {
         const form = new FormData();
@@ -63,6 +64,7 @@ function CreatePost(props) {
         ).then(res => {
             console.log(res);
             alert("Submit successfully!")
+            setSuccess(true);
         })
     }
 
@@ -74,6 +76,10 @@ function CreatePost(props) {
 
     if (!props.loginStatus) {
         return <Redirect to="/login"/>
+    }
+
+    if (success) {
+        return <Redirect to="/home" />
     }
 
     return (
