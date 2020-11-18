@@ -1,6 +1,7 @@
 package com.cattraction.demo.controllers;
 
 import com.cattraction.demo.domains.User;
+import com.cattraction.demo.domains.Post;
 import com.cattraction.demo.services.PostService;
 import com.cattraction.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,22 @@ public class UserController {
         this.postService = postService;
     }
 
-    /*@GetMapping("/allUsers")
+    @GetMapping("/allUsers")
     public List<User> getUsers(){
-        userService.deleteUser("aaa");
-        List<User> gan=null;
-        return gan;
-        //return userService.getallUsers("aaa");
-    }*/
+        return userService.getallUsers("user");
+    }
+
+    @PostMapping("/myaccount")
+    public List<Post> myaccount(@RequestParam Map<String,Object> paramMap){
+        String email = paramMap.get("email").toString();
+        return postService.getPostbyemail(email);
+    }
+
+    @GetMapping("/allPosts")
+    public List<Post> getPosts(){
+        return postService.getallPosts("post");
+        //return postService.getPostbyemail("af");
+    }
 
 
     @PostMapping("/login")
@@ -42,7 +52,7 @@ public class UserController {
         //return "hello";
     }
 
-    @PostMapping("/signup") //(consumes = "application/json", produces = "application/json")
+    @PostMapping("/signup")
     public boolean SignUp(@RequestParam Map<String,Object> paramMap){
         //if(paramMap==null)return "fuck";
         String email = paramMap.get("email").toString();
@@ -55,12 +65,10 @@ public class UserController {
     @CrossOrigin("*")
     public Map<String, Object> uploadUserProfileImage(
             @RequestParam MultipartFile[] photos,
-            @RequestParam String description
-//            ,@RequestParam String creater
+            @RequestParam String description,
+            @RequestParam String creater,
+            @RequestParam String time
     ){
-
-        String creater = "aaa";
-
         List<String> postUrl = new ArrayList<>();
         for(MultipartFile file: photos){
             String url = userService.uploadUserImageToS3Bucket(file);
@@ -70,7 +78,7 @@ public class UserController {
             postUrl.add(url);
         }
 
-        Map<String, Object> metadata = postService.createPost(creater, postUrl, description);
+        Map<String, Object> metadata = postService.createPost(creater, postUrl, description,time);
 
         return metadata;
     }

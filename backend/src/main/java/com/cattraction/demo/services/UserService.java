@@ -24,8 +24,8 @@ public class UserService {
         this.fileStore = fileStore;
     }
 
-    public List<User> getallUsers(String email){
-        return userDataAccessService.getallUsers(email);
+    public List<User> getallUsers(String tag){
+        return userDataAccessService.getallUsers(tag);
     }
 
     public User getUser(String email){

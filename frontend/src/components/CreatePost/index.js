@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import DeleteIcon from '@material-ui/icons/Delete';
 
+var myDate = new Date();
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -50,6 +52,8 @@ function CreatePost(props) {
             form.append('photos', photos[i]);
         }
         form.append('description', description);
+        form.append('creater',localStorage.getItem('email'))
+        form.append('time',myDate.toLocaleString())
         return axios.post(
             localStorage.getItem("ip")+"/api/v1/user-profile/newpost",
             form,
@@ -58,6 +62,7 @@ function CreatePost(props) {
             }
         ).then(res => {
             console.log(res);
+            alert("Submit successfully!")
         })
     }
 

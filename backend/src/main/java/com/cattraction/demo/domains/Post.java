@@ -10,12 +10,15 @@ public class Post {
     private String postDesc;
     private List<String> postUrl;
     private String creater;
+    private String tag="post";
+    private String time;
 
-    public Post(UUID postId, String postDesc, List<String> postUrl, String creater) {
+    public Post(UUID postId, String postDesc, List<String> postUrl, String creater,String time) {
         this.postId = postId;
         this.postDesc = postDesc;
         this.postUrl = postUrl;
         this.creater = creater;
+        this.time=time;
     }
 
     @Override

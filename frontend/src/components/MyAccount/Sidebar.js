@@ -76,8 +76,9 @@ function Sidebar(props) {
                             <Avatar src={user.avatar_url} alt="avatar" className={classes.avatar}>A</Avatar>
                         </div>
                         <CardContent className={classes.content}>
+
                             <div className={classes.username}>
-                                {localStorage.getItem("email")}
+                                {localStorage.getItem('email')}
                             </div>
                             <div className={classes.follow}>
                                 <span className={classes.following}>following {user.following}</span>

@@ -23,4 +23,12 @@ public class PostDataAccessSerivice {
     }
 
     public void savePost(Post post){ postRepository.save(post);}
+
+    public List<Post> getallPosts(String tag){
+      return postRepository.findAllByTag(tag);
+    }
+
+    public List<Post> getPostbyemail(String email){
+      return postRepository.findAllByCreater(email);
+    }
 }

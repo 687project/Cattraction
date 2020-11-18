@@ -18,6 +18,7 @@ public class User {
     @Id
     private UUID userId;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+    private String tag="user";
     private String username;
     private String email;
     private String password;

@@ -18,8 +18,8 @@ public class UserDataAccessService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getallUsers(String email){
-        return  userRepository.findAllByEmail(email);
+    public List<User> getallUsers(String tag){
+        return  userRepository.findAllByTag(tag);
     }
 
     public User getUser(String email){

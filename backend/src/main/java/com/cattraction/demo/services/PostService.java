@@ -20,9 +20,9 @@ public class PostService{
         this.postDataAccessSerivice = postDataAccessSerivice;
     }
 
-    public Map<String, Object> createPost(String creater, List<String> postUrl, String description){
+    public Map<String, Object> createPost(String creater, List<String> postUrl, String description, String time){
         UUID id = UUID.randomUUID();
-        Post post = new Post(id, description, postUrl, creater);
+        Post post = new Post(id, description, postUrl, creater,time);
         postDataAccessSerivice.savePost(post);
 
         Map<String, Object> metadata = new HashMap<>();
@@ -36,5 +36,13 @@ public class PostService{
 
     public Post getPosts(String postId){
         return postDataAccessSerivice.getPost(postId);
+    }
+
+    public List<Post> getallPosts(String tag){
+      return postDataAccessSerivice.getallPosts(tag);
+    }
+
+    public List<Post> getPostbyemail(String email){
+      return postDataAccessSerivice.getPostbyemail(email);
     }
 }

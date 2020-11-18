@@ -73,7 +73,7 @@ function Main(props) {
 }
 
 const mapStatesToProps = (state) => ({
-    postTime: "2020:11:11",
+    postTime: state.getIn(['post', 'postTime']),
     photoList: state.getIn(['post', 'photoList']),
     description: state.getIn(['post', 'description']),
 })
