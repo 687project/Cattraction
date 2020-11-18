@@ -55,14 +55,15 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [ emailError, setEmailError ] = useState('');
+    const [emailError, setEmailError] = useState('');
 
     const handleSignUp = () => {
         axios({
             method: 'post',
-            url: localStorage.getItem("ip")+'/api/v1/user-profile/signup',
-            params: {email: email, password: password}
+            url: localStorage.getItem("ip") + '/api/v1/user-profile/signup',
+            params: {email: email, password: password, username: username}
         }).then(res => {
             if (res.data) {
                 alert("Sign up successfully!")
@@ -90,6 +91,20 @@ export default function SignUp(props) {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                value={username}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="username"
+                                label="Username"
+                                type="username"
+                                id="username"
+                                autoComplete="current-username"
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 value={email}
