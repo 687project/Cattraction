@@ -66,9 +66,19 @@ function Home(props) {
 
 const mapDispatchToProps = (dispatch) => ({
     changeHomeContentData(topic = 'daily-feed') {
-        axios.get(`/api/posts/t/${topic}.json`).then((res) => {
+        /*axios.get(`/api/posts/t/${topic}.json`).then((res) => {
             const result = res.data;
             dispatch(actions.changHomeContentData(result));
+        }).catch((err) => {
+            console.log(err);
+        });*/
+        axios({
+            method: 'post',
+            url:localStorage.getItem("ip")+'/api/v1/user-profile/recommendation',
+            params:{ }
+        }).then(res => {
+           const result = res.data;
+           dispatch(actions.changHomeContentData(result));
         }).catch((err) => {
             console.log(err);
         });

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("api/v1/user-profile")
@@ -37,10 +38,39 @@ public class UserController {
         return postService.getPostbyemail(email);
     }
 
-    @GetMapping("/allPosts")
+    /*@GetMapping("/allPosts")
     public List<Post> getPosts(){
         return postService.getallPosts("post");
         //return postService.getPostbyemail("af");
+    }*/
+
+    /*@GetMapping("/post")
+    public Post getPost(){//@RequestParam String id
+        return postService.getPosts("9E4D3367-EDFD-37C0-9FB6-57A6972371A1");
+        //return postService.getPostbyemail("af");
+    }*/
+
+    @PostMapping("/recommendation")
+    public List<Map<String, Object>> recommendation(){
+      List<Post> post=postService.getallPosts("post");
+      List<Map<String, Object>> list= new ArrayList<>();
+
+      for(Post p: post){
+        User u=userService.getUser(p.getCreater());
+
+        Map<String,Object> user = new HashMap<>();
+        user.put("id",u.getuserId().toString());
+        user.put("username",u.getEmail());
+        user.put("avatarUrl",u.getuserImageLink());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("postId", p.getPostId());
+        map.put("coverUrl",p.getPostUrl().get(0));
+        map.put("user",user);
+        list.add(map);
+      }
+
+      return list;
     }
 
 
