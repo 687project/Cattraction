@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class PostDataAccessSerivice {
@@ -18,7 +19,7 @@ public class PostDataAccessSerivice {
         this.postRepository = postRepository;
     }
 
-    public Post getPost(String postId) {
+    public Post getPost(UUID postId) {
         return postRepository.findByPostId(postId);
     }
 

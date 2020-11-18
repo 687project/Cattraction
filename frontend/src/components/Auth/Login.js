@@ -176,6 +176,7 @@ const mapDispatchToProps = (dispatch) => ({
                 alert("log in successfully!")
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('email', res.data["email"])
+                localStorage.setItem('username', res.data["username"])
                 dispatch(actions.authenticateUser(res.data.user))
             }
             console.log(res.data);

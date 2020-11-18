@@ -47,11 +47,19 @@ const mapStatesToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     getPost(id) {
         dispatch(actions.clearContentData());
-        axios.get(`/api/posts/${id}.json`)
+        /*axios.get(`/api/posts/${id}.json`)
             .then((res) => {
                 const result = res.data;
                 dispatch(actions.changHomeContentData(result));
-            });
+            });*/
+            axios({
+                method: 'post',
+                url:localStorage.getItem("ip")+'/api/v1/posts/getpost',
+                params:{  postId: id}
+            }).then(res => {
+                const result = res.data;
+                dispatch(actions.changHomeContentData(result));
+            })
     }
 })
 

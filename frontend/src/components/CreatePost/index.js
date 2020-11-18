@@ -91,7 +91,7 @@ function CreatePost(props) {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom>
-                            Upload Your cat photos
+                            Upload Your Cat Photos
                         </Typography>
                         <input
                             accept="image/*"

@@ -78,7 +78,7 @@ function Sidebar(props) {
                         <CardContent className={classes.content}>
 
                             <div className={classes.username}>
-                                {localStorage.getItem('email')}
+                                {localStorage.getItem('username')}
                             </div>
                             <div className={classes.follow}>
                                 <span className={classes.following}>following {user.following}</span>

@@ -130,13 +130,13 @@ function Header(props) {
                                 <Fragment>
                                   <Link to="/myaccount" underline="none" component={RouterLink}>
                                       <Button variant="outlined" color="primary" startIcon={<AccountCircleIcon style={{color: "primary"}}/>}>
-                                          MyAccount
+                                          Profile
                                       </Button>
                                   </Link>
 
                                   <Link to="/home" underline="none" component={RouterLink}>
                                     <Button onClick={props.handleLogout} variant="outlined" color="primary" startIcon={<ExitToAppIcon style={{color: "primary"}}/>}>
-                                        Logout
+                                        Log Out
                                     </Button>
                                   </Link>
                                 </Fragment> :

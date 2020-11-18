@@ -13,7 +13,8 @@ public class Post {
     private String tag="post";
     private String time;
 
-    public Post(UUID postId, String postDesc, List<String> postUrl, String creater,String time) {
+
+    public Post(UUID postId, String postDesc, List<String> postUrl, String creater, String time) {
         this.postId = postId;
         this.postDesc = postDesc;
         this.postUrl = postUrl;
@@ -29,12 +30,13 @@ public class Post {
         return postId.equals(post.postId) &&
                 Objects.equals(postDesc, post.postDesc) &&
                 postUrl.equals(post.postUrl) &&
-                creater.equals(post.creater);
+                creater.equals(post.creater) &&
+                time.equals(post.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(postId, postDesc, postUrl, creater);
+        return Objects.hash(postId, postDesc, postUrl, creater, time);
     }
 
     public UUID getPostId() {
@@ -68,4 +70,13 @@ public class Post {
     public void setCreater(String creater) {
         this.creater = creater;
     }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 }

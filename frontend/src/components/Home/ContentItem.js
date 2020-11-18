@@ -111,7 +111,7 @@ export default function ContentItem(props) {
                     <div className={classes.bottomBtnBar}>
                         <Button className={classes.leftBtn}>
                             <Avatar alt={username} src={avatarUrl}/>
-                            <span className={classes.username}>sad</span>
+                            <span className={classes.username}>{username}</span>
                         </Button>
                         <Button className={classes.rightBtn}>
                             <GetAppRoundedIcon/>

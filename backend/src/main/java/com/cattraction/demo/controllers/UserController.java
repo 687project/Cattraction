@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/user-profile")
@@ -38,17 +39,18 @@ public class UserController {
         return postService.getPostbyemail(email);
     }
 
-    /*@GetMapping("/allPosts")
+    @GetMapping("/allPosts")
     public List<Post> getPosts(){
         return postService.getallPosts("post");
         //return postService.getPostbyemail("af");
-    }*/
+    }
 
-    /*@GetMapping("/post")
+    @GetMapping("/post")
     public Post getPost(){//@RequestParam String id
-        return postService.getPosts("9E4D3367-EDFD-37C0-9FB6-57A6972371A1");
+         UUID postId=UUID.fromString("e435bb31-459b-4cd0-b093-98b804e2767c");
+        return postService.getPost(postId);
         //return postService.getPostbyemail("af");
-    }*/
+    }
 
     @PostMapping("/recommendation")
     public List<Map<String, Object>> recommendation(){
@@ -87,7 +89,8 @@ public class UserController {
         //if(paramMap==null)return "fuck";
         String email = paramMap.get("email").toString();
         String password = paramMap.get("password").toString();
-        boolean status =userService.signUp(email,"my", password);
+        String username = paramMap.get("username").toString();
+        boolean status =userService.signUp(email,username, password);
         return status;
     }
 

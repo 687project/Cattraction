@@ -34,7 +34,7 @@ public class PostService{
         return metadata;
     }
 
-    public Post getPosts(String postId){
+    public Post getPost(UUID postId){
         return postDataAccessSerivice.getPost(postId);
     }
 
