@@ -2,8 +2,12 @@
 
 # Cattraction
 
-Cattraction is an comprehensive information portal that provide pet image sharing and social media service 
-designed to enable saving and discovery of information using posts and images, in the form of pinboards.
+**Cattraction** is an website that allow users to share images, post texts, and explore all kinds of cat information.
+
+The main killer app idea is a comprehensive information service and trendy pet social system.
+
+Cattraction not only means our website is a wonderful place for cat breeders and cattery owners, but also targeted
+
 
 
 
