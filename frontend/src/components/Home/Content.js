@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     contentWrapper: {
-        marginTop: '1em',
+        margin: '1em 0',
         columnCount: 3,
         columnGap: "20px",
     },

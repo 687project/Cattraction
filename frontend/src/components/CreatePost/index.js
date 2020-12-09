@@ -10,8 +10,10 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import DeleteIcon from '@material-ui/icons/Delete';
-
-var myDate = new Date();
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         right: '50%',
     },
+    formControl: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        minWidth: 240,
+    },
 }));
 
 function CreatePost(props) {
@@ -46,17 +53,23 @@ function CreatePost(props) {
     const [photos, setPhotos] = useState([])
     const [description, setDescription] = useState('')
     const [success, setSuccess] = useState(false);
+    const [postCategory, setPostCategory] = useState("general");
+    const [catName, setCatName] = useState("");
+    const [catAge, setCatAge] = useState("");
+    const [catBreed, setCatBreed] = useState("");
+    const [catLocation, setCatLocation] = useState("");
+    const [postTitle, setPostTitle] = useState("");
 
     const handleSubmit = () => {
         const form = new FormData();
-        for(let i in photos){
+        for (let i in photos) {
             form.append('photos', photos[i]);
         }
         form.append('description', description);
-        form.append('creater',localStorage.getItem('email'))
-        form.append('time',myDate.toLocaleString())
+        form.append('creater', localStorage.getItem('email'))
+        form.append('time', new Date().toLocaleString())
         return axios.post(
-            localStorage.getItem("ip")+"/api/v1/user-profile/newpost",
+            localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
             form,
             {
                 headers: {'Content-Type': 'multipart/form-data'},
@@ -74,12 +87,8 @@ function CreatePost(props) {
         setPhotos(newPhotos);
     }
 
-    if (!props.loginStatus) {
-        return <Redirect to="/login"/>
-    }
-
     if (success) {
-        return <Redirect to="/home" />
+        return <Redirect to="/home"/>
     }
 
     return (
@@ -90,8 +99,82 @@ function CreatePost(props) {
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="select-category-label">Post Category</InputLabel>
+                            <Select
+                                labelId="select-category-label"
+                                id="demo-simple-select-outlined"
+                                value={postCategory}
+                                onChange={e => setPostCategory(e.target.value)}
+                                label="Post Category"
+                            >
+                                <MenuItem value={"general"}>General</MenuItem>
+                                <MenuItem value={"catDating"}>Cat Dating</MenuItem>
+                            </Select>
+                        </FormControl>
+                        {
+                            postCategory === "catDating" ? <div>
+                                <form style={{width: '50%', margin: '1rem 0'}} noValidate>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                value={catName}
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                name="catName"
+                                                label="Cat Name"
+                                                type="text"
+                                                id="catName"
+                                                onChange={e => setCatName(e.target.value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                value={catAge}
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                id="catAge"
+                                                label="Cat Age"
+                                                name="catAge"
+                                                type="text"
+                                                onChange={e => setCatAge(e.target.value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                value={catBreed}
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                name="catBreed"
+                                                label="Cat Breed"
+                                                type="text"
+                                                id="catBreed"
+                                                autoComplete="current-password"
+                                                onChange={e => setCatBreed(e.target.value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                value={catLocation}
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                name="catLocation"
+                                                label="Cat Location"
+                                                type="text"
+                                                id="catLocation"
+                                                onChange={e => setCatLocation(e.target.value)}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </form>
+                            </div> : <React.Fragment />
+                        }
                         <Typography variant="h6" gutterBottom>
-                            Upload Your Cat Photos
+                            Upload your cat photos:
                         </Typography>
                         <input
                             accept="image/*"
@@ -120,7 +203,7 @@ function CreatePost(props) {
                                             variant="outlined"
                                             onClick={() => handleDeletePhoto(index)}
                                         >
-                                            <DeleteIcon />
+                                            <DeleteIcon/>
                                         </IconButton>
                                     </Grid>
                                 ))
@@ -133,15 +216,28 @@ function CreatePost(props) {
                         </label>
                     </Grid>
                     <Grid item xs={12}>
+                        <TextField
+                            style={{minWidth: "300px"}}
+                            value={postTitle}
+                            variant="outlined"
+                            required
+                            name="postTitle"
+                            label="Post Title"
+                            type="text"
+                            id="postTitle"
+                            onChange={e => setPostTitle(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom>
-                            Write down what you want to say about that
+                            Describe your post here:
                         </Typography>
                         <TextField
                             id="description"
                             name="description"
-                            label="description"
+                            label="Description"
                             variant="outlined"
-                            placeholder="Your words..."
+                            placeholder="Describe your post here..."
                             rows={4}
                             fullWidth
                             multiline
