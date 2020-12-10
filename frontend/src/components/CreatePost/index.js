@@ -14,6 +14,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +60,7 @@ function CreatePost(props) {
     const [postCategory, setPostCategory] = useState("general");
     const [catName, setCatName] = useState("");
     const [catAge, setCatAge] = useState("");
+    const [catGender, setCatGender] = useState("");
     const [catBreed, setCatBreed] = useState("");
     const [catLocation, setCatLocation] = useState("");
     const [postTitle, setPostTitle] = useState("");
@@ -66,25 +71,49 @@ function CreatePost(props) {
             form.append('photos', photos[i]);
         }
         form.append('description', description);
-        form.append('creater', localStorage.getItem('email'))
-        form.append('time', new Date().toLocaleString())
-        return axios.post(
-            localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
-            form,
-            {
-                headers: {'Content-Type': 'multipart/form-data'},
-            }
-        ).then(res => {
-            console.log(res);
-            alert("Submit successfully!")
-            setSuccess(true);
-        })
+        form.append('title', postTitle);
+        form.append('creater', localStorage.getItem('email'));
+        form.append('time', new Date().toLocaleString());
+
+        if (postCategory === "general") {
+            return axios.post(
+                localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
+                form,
+                {
+                    headers: {'Content-Type': 'multipart/form-data'},
+                }
+            ).then(res => {
+                console.log(res);
+                alert("Submit successfully!")
+                setSuccess(true);
+            })
+        } else if (postCategory === "catDating") {
+            form.append('catName', catName);
+            form.append('catBreed', catBreed);
+            form.append('catLocation', catLocation);
+            form.append('catAge', catAge);
+            return axios.post(
+                localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
+                form,
+                {
+                    headers: {'Content-Type': 'multipart/form-data'},
+                }
+            ).then(res => {
+                console.log(res);
+                alert("Submit successfully!")
+                setSuccess(true);
+            })
+        }
     }
 
     const handleDeletePhoto = (index) => {
         const newPhotos = [...photos];
         newPhotos.splice(index, 1);
         setPhotos(newPhotos);
+    }
+
+    if (!props.loginStatus) {
+        return <Redirect to="/login"/>
     }
 
     if (success) {
@@ -130,6 +159,16 @@ function CreatePost(props) {
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
+                                            <FormControl component="fieldset">
+                                                <FormLabel component="legend">Gender</FormLabel>
+                                                <RadioGroup row name="gender1" value={catGender}
+                                                            onChange={e => setCatName(e.target.value)}>
+                                                    <FormControlLabel value="1" control={<Radio/>} label="♂"/>
+                                                    <FormControlLabel value="0" control={<Radio/>} label="♀"/>
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </Grid>
+                                        <Grid item xs={12}>
                                             <TextField
                                                 value={catAge}
                                                 variant="outlined"
@@ -171,7 +210,7 @@ function CreatePost(props) {
                                         </Grid>
                                     </Grid>
                                 </form>
-                            </div> : <React.Fragment />
+                            </div> : <React.Fragment/>
                         }
                         <Typography variant="h6" gutterBottom>
                             Upload your cat photos:
