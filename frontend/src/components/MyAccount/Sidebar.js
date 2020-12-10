@@ -73,7 +73,7 @@ function Sidebar(props) {
                 <Paper square={true} elevation={0}>
                     <Card elevation={0}>
                         <div className={classes.cardHeader}>
-                            <Avatar src={user.avatar_url} alt="avatar" className={classes.avatar}>A</Avatar>
+                            <Avatar src={user.avatarUrl} alt="avatar" className={classes.avatar}>A</Avatar>
                         </div>
                         <CardContent className={classes.content}>
 

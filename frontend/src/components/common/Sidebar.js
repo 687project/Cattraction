@@ -2,7 +2,6 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import {connect} from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import {CardContent} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -62,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Sidebar(props) {
+export default function Sidebar(props) {
     const classes = useStyles();
 
     const { user } = props;
@@ -73,7 +72,7 @@ function Sidebar(props) {
                 <Paper square={true} elevation={0}>
                     <Card elevation={0}>
                         <div className={classes.cardHeader}>
-                            <Avatar src={user.avatar_url} alt="avatar" className={classes.avatar}>A</Avatar>
+                            <Avatar src={user.avatarUrl} alt="avatar" className={classes.avatar}>A</Avatar>
                         </div>
                         <CardContent className={classes.content}>
                             <div className={classes.username}>
@@ -113,9 +112,3 @@ function Sidebar(props) {
         </Grid>
     )
 }
-
-const mapStatesToProps = (state) => ({
-    user: state.getIn(['post', 'user']),
-})
-
-export default connect(mapStatesToProps, null)(Sidebar)

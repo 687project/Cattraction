@@ -10,6 +10,8 @@ import User from "./components/User";
 import Header from "./components/common/Header";
 import CreatePost from "./components/CreatePost";
 import MyAccount from "./components/MyAccount";
+import CatDatingPost from "./components/CatDatingPost";
+import SearchResult from "./components/SearchResult";
 
 const theme = createMuiTheme({
     shape: {
@@ -31,9 +33,11 @@ export default function App() {
         <Fragment>
             <Header />
             <Switch>
-                <Route path="/posts/:id" exact component={Post}/>
+                <Route path="/posts/general/:id" exact component={Post}/>
+                <Route path="/posts/cat-dating/:id" exact component={CatDatingPost}/>
                 <Route path="/myaccount" exact component={MyAccount}/>
                 <Route path="/newpost" exact component={CreatePost}/>
+                <Route path="/search/:query" exact component={SearchResult}/>
                 <Route path="/users/:id" exact component={User}/>
                 <Route path={["/", "/index", "/home"]} exact component={Home} />
             </Switch>

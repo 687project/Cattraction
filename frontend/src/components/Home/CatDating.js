@@ -52,7 +52,7 @@ export default function CatDating() {
             >
                 {postList.map((post) => (
                     <Grid item xs={12} sm={12}>
-                        <Link to={`/home`} className={classes.link}>
+                        <Link to={`/posts/cat-dating/${post.postId}`} className={classes.link}>
                             <Card className={classes.root}>
                                 <CardMedia
                                     className={classes.cardMediaImg}

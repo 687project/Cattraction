@@ -1,7 +1,7 @@
 [
   {
     "coverUrl": "https://cattraction-image-upload.s3.us-east-2.amazonaws.com/1605671409906-photos",
-    "postId": "96201f0f-216a-4c8d-a2ea-2b3cdf2dc5f7",
+    "postId": "1",
     "user": {
       "avatarUrl": null,
       "id": "6961cb4b-7ac7-4a79-8b7f-3ed27274fa45",
@@ -10,6 +10,7 @@
     "catName": "sushi",
     "catBreed": "meiduan",
     "catAge": "10",
+    "catGender": 1,
     "catLocation": "Syracuse",
     "description": "This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog.This is a dog."
   },
@@ -24,6 +25,7 @@
     "catName": "sushi",
     "catBreed": "meiduan",
     "catAge": "10",
+    "catGender": 1,
     "catLocation": "Syracuse",
     "description": "This is a dog."
   },
@@ -38,6 +40,7 @@
     "catName": "sushi",
     "catBreed": "meiduan",
     "catAge": "10",
+    "catGender": 1,
     "catLocation": "Syracuse",
     "description": "This is a dog."
   }

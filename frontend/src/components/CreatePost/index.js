@@ -223,9 +223,7 @@ function CreatePost(props) {
                             type="file"
                             value=""
                             onChange={e => {
-                                console.log(e.target.files[0])
                                 setPhotos([...photos, e.target.files[0]])
-                                console.log(photos);
                             }}
                         />
                         <Grid container>

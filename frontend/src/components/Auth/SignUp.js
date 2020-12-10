@@ -81,9 +81,6 @@ export default function SignUp(props) {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                {/* <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar> */}
                 <img src={logoSmall} alt="Avatar" className={classes.imageLogoSmall}/>
                 <br></br>
                 <Typography component="h1" variant="h4">

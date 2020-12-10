@@ -60,7 +60,7 @@ export default function UserCard(props) {
 
     const userInfo = {
         "user_id": 123,
-        "avatar_url": "https://p3-bcy.byteimg.com/img/banciyuan/Public/Upload/avatar/1216315/fb2f3c1cdd6d40f0ae059e761f83ecde/fat.jpg~tplv-banciyuan-abig.image",
+        "avatarUrl": "https://p3-bcy.byteimg.com/img/banciyuan/Public/Upload/avatar/1216315/fb2f3c1cdd6d40f0ae059e761f83ecde/fat.jpg~tplv-banciyuan-abig.image",
         "username": "Jack",
         "following": 123,
         "followed": 34513,
@@ -70,7 +70,7 @@ export default function UserCard(props) {
     return (
         <Card elevation={0}>
             <div className={classes.cardHeader}>
-                <Avatar src={userInfo.avatar_url} alt="avatar" className={classes.avatar}>A</Avatar>
+                <Avatar src={userInfo.avatarUrl} alt="avatar" className={classes.avatar}>A</Avatar>
             </div>
             <CardContent className={classes.content}>
                 <div className={classes.username}>

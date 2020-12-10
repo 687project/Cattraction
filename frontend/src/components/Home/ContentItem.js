@@ -92,7 +92,7 @@ export default function ContentItem(props) {
 
     return (
         <div className={classes.itemContainer}>
-            <Link to={`/posts/${postId}`} className={classes.link}>
+            <Link to={`/posts/general/${postId}`} className={classes.link}>
                 <CardMedia
                     image={coverUrl}
                     component="img"

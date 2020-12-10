@@ -14,7 +14,7 @@ const changeUser = (result) => ({
     type: CHANGE_USER,
     userId: result.id,
     username: result.username,
-    avatarUrl: result.avatar_url,
+    avatarUrl: result.avatarUrl,
     followingCount: result.following,
     followedCount: result.followed,
     signature: result.signature
