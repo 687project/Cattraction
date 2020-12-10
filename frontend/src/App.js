@@ -35,7 +35,7 @@ export default function App() {
                 <Route path="/myaccount" exact component={MyAccount}/>
                 <Route path="/newpost" exact component={CreatePost}/>
                 <Route path="/users/:id" exact component={User}/>
-                <Route path={["/", "/home", "/t/:topic"]} exact component={Home}/>
+                <Route path={["/", "/index", "/home"]} exact component={Home} />
             </Switch>
         </Fragment>
     );

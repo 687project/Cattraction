@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import ContentItem from "./ContentItem";
-import {connect} from "react-redux";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     contentWrapper: {
@@ -11,19 +11,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Content(props) {
+export default function Content(props) {
     const classes = useStyles();
+    const [postList, setPostList] = useState([]);
+    const {topic} = props;
+
+    useEffect(() => {
+        axios({
+            method: 'get',
+            // url: localStorage.getItem("ip") + `/api/posts/t/${topic}.json`,
+            url: `/api/posts/t/${topic}.json`
+        }).then(res => {
+            setPostList(res.data);
+        })
+    }, []);
+
     return (
         <div className={classes.contentWrapper}>
-            {props.posts.map((post) => (
+            {postList.map((post) => (
                 <ContentItem key={post.postId} {...post} />
             ))}
         </div>
     );
 }
-
-const mapStateToProps = (state) => ({
-    posts: state.getIn(['home', 'postList'])
-})
-
-export default connect(mapStateToProps, null)(Content);
