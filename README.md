@@ -14,7 +14,8 @@ Cattraction not only means our website is a wonderful place for cat breeders and
 ## Tech Stack
 Java/SpringBoot, React, MongoDB, AWS.
 
-## Installation
+
+## Start the Server
 
 Install MonGoDB
 ```
@@ -27,7 +28,7 @@ Start the Server
 ./frontend.sh
 ```
 
-Or visit our website directly at
+Or visit our deployed website directly at
 ```
 http://216.171.38.35:3000/home
 ```
