@@ -15,18 +15,19 @@ Cattraction not only means our website is a wonderful place for cat breeders and
 Java/SpringBoot, React, MongoDB, AWS.
 
 ## Installation
-To run our code, run the two commands in two terminals
+
+Install MonGoDB
+```
+sudo apt install mongodb
+```
+
+Start the Server
 ```
 ./backend.sh
 ./frontend.sh
 ```
-The frontend is connect to our server which address is **216.171.38.35**, if you wanna connect it the localhost, you need to modify two lines in **/frontend/src/index.js**. In line 10-11, you could select one address setting. If you comment the first one and uncomment the 
-second one, the frontend will be connect to the localhost.
+
+Or visit our website directly at
 ```
-localStorage.setItem("ip",'http://216.171.38.35:8080')
-//localStorage.setItem("ip",'http://localhost:8080')
-```
-If you do not have MonGoDB installed, run the following command to install it.(Ubuntu)
-```
-sudo apt install mongodb
+http://216.171.38.35:3000/home
 ```
