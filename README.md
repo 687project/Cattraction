@@ -20,3 +20,9 @@ To run our code, run the two commands in two terminals
 ./backend.sh
 ./frontend.sh
 ```
+The frontend is connect to our server which address is **216.171.38.35**, if you wanna connect it the localhost, you need to modify on line in **/frontend/src/index.js**. In line 10-11, you could select one address setting. If you comment the first one and uncomment the 
+second one, the frontend will be connect to the localhost.
+```
+localStorage.setItem("ip",'http://216.171.38.35:8080')
+//localStorage.setItem("ip",'http://localhost:8080')
+```
