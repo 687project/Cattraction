@@ -26,3 +26,7 @@ second one, the frontend will be connect to the localhost.
 localStorage.setItem("ip",'http://216.171.38.35:8080')
 //localStorage.setItem("ip",'http://localhost:8080')
 ```
+If you do not have MonGoDB installed, run the following command to install it.(Ubuntu)
+```
+sudo apt install mongodb
+```
