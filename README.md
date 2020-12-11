@@ -14,7 +14,7 @@ Cattraction not only means our website is a wonderful place for cat breeders and
 ## Tech Stack
 Java/SpringBoot, React, MongoDB, AWS.
 
-##Installation
+## Installation
 To run our code, run the two commands in two terminals
 ```
 ./backend.sh
