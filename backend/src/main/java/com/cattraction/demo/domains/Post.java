@@ -7,6 +7,7 @@ import java.util.UUID;
 public class Post {
 
     private UUID postId;
+    private String title;
     private String postDesc;
     private List<String> postUrl;
     private String creater;
@@ -14,12 +15,13 @@ public class Post {
     private String time;
 
 
-    public Post(UUID postId, String postDesc, List<String> postUrl, String creater, String time) {
+    public Post(UUID postId, String postDesc, List<String> postUrl, String creater, String time, String title) {
         this.postId = postId;
         this.postDesc = postDesc;
         this.postUrl = postUrl;
         this.creater = creater;
         this.time=time;
+        this.title=title;
     }
 
     @Override
@@ -77,6 +79,14 @@ public class Post {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

@@ -70,14 +70,14 @@ function CreatePost(props) {
         for (let i in photos) {
             form.append('photos', photos[i]);
         }
-        form.append('description', description);
-        form.append('title', postTitle);
-        form.append('creater', localStorage.getItem('email'));
-        form.append('time', new Date().toLocaleString());
-
+        const data = [];
+        form.append('data',localStorage.getItem('email'))
+        form.append('data',description)
+        form.append('data',new Date().toLocaleString())
+        form.append('data',postTitle)
         if (postCategory === "general") {
             return axios.post(
-                localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
+                localStorage.getItem("ip") + "/api/v1/posts/newpost",
                 form,
                 {
                     headers: {'Content-Type': 'multipart/form-data'},
@@ -88,12 +88,13 @@ function CreatePost(props) {
                 setSuccess(true);
             })
         } else if (postCategory === "catDating") {
-            form.append('catName', catName);
-            form.append('catBreed', catBreed);
-            form.append('catLocation', catLocation);
-            form.append('catAge', catAge);
+          form.append('cat',catName)
+          form.append('cat',catAge)
+          form.append('cat',catBreed)
+          form.append('cat',catGender)
+          form.append('cat',catLocation)
             return axios.post(
-                localStorage.getItem("ip") + "/api/v1/user-profile/newpost",
+                localStorage.getItem("ip") + "/api/v1/posts/catnewpost",
                 form,
                 {
                     headers: {'Content-Type': 'multipart/form-data'},
@@ -162,7 +163,7 @@ function CreatePost(props) {
                                             <FormControl component="fieldset">
                                                 <FormLabel component="legend">Gender</FormLabel>
                                                 <RadioGroup row name="gender1" value={catGender}
-                                                            onChange={e => setCatName(e.target.value)}>
+                                                            onChange={e => setCatGender(e.target.value)}>
                                                     <FormControlLabel value="1" control={<Radio/>} label="♂"/>
                                                     <FormControlLabel value="0" control={<Radio/>} label="♀"/>
                                                 </RadioGroup>

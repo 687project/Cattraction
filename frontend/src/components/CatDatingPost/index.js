@@ -23,11 +23,9 @@ export default function CatDatingPost(props) {
 
     useEffect(() => {
         axios({
-            // method: 'post',
-            // url: localStorage.getItem("ip") + '/api/v1/posts/getCatDatingPost',
-            // params: {postId: id}
-            method: 'get',
-            url: `/api/posts/${id}.json`,
+            method: 'post',
+            url: localStorage.getItem("ip") + '/api/v1/posts/getcatpost',
+            params: {postId: id}
         }).then(res => {
             const post = res.data;
             setPost(post);

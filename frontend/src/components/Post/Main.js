@@ -9,12 +9,13 @@ const useStyles = makeStyles((theme) => ({
     mainGrid: {
         boxShadow: '0 2px 8px 0 rgba(0,0,0,.05)',
         backgroundColor: '#fff',
+        padding: '30px 0 10px',
     },
     post: {
         padding: '0 110px 40px',
     },
     header: {
-        padding: '30px 0 10px',
+        margin: '1em 0',
     },
     headerMetaData: {
         marginBottom: '20px',
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     description: {
-        margin: '20px 0',
+        marginTop: '2em',
+        marginBottom: '1em'
     },
     picture: {
         margin: '20px 0',
@@ -43,16 +45,16 @@ export default function Main(props) {
     return (
         <Grid item xs={12} md={9}>
             <div className={classes.mainGrid}>
-                <Typography variant="h6" gutterBottom>
-                    {post.title}
-                </Typography>
                 <Paper square={true} elevation={0} className={classes.post}>
+                    <Typography variant="h2" >
+                        {post.title}
+                    </Typography>
+                    <Divider/>
                     <div className={classes.header}>
                         <div className={classes.headerMetaData}>
                             <span>{post.postTime}</span>
                             <span>{post.imgUrls.length} pictures</span>
                         </div>
-                        <Divider/>
                     </div>
                     <Typography className={classes.description}>
                         {post.description}

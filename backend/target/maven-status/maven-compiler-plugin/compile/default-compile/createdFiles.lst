@@ -3,10 +3,14 @@ com/cattraction/demo/services/PostService.class
 com/cattraction/demo/repository/UserRepository.class
 com/cattraction/demo/dataAccessObjects/UserDataAccessService.class
 com/cattraction/demo/DemoApplication.class
+com/cattraction/demo/services/CatPostService.class
+com/cattraction/demo/dataAccessObjects/CatPostDataAccessSerivice.class
 com/cattraction/demo/controllers/PostController.class
 com/cattraction/demo/datastore/FakeUserProfileDataStore.class
+com/cattraction/demo/repository/CatPostRepository.class
 com/cattraction/demo/domains/User.class
 com/cattraction/demo/filestore/FileStore.class
+com/cattraction/demo/domains/CatPost.class
 com/cattraction/demo/domains/Post.class
 com/cattraction/demo/services/UserService.class
 com/cattraction/demo/controllers/UserController.class

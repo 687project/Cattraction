@@ -18,9 +18,9 @@ export default function Content(props) {
 
     useEffect(() => {
         axios({
-            method: 'get',
-            // url: localStorage.getItem("ip") + `/api/posts/t/${topic}.json`,
-            url: `/api/posts/t/${topic}.json`
+          method: 'post',
+          url:localStorage.getItem("ip")+'/api/v1/posts/recommendation',
+          params:{ }
         }).then(res => {
             setPostList(res.data);
         })

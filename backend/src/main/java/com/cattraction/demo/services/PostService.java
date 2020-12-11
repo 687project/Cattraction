@@ -20,9 +20,9 @@ public class PostService{
         this.postDataAccessSerivice = postDataAccessSerivice;
     }
 
-    public Map<String, Object> createPost(String creater, List<String> postUrl, String description, String time){
+    public Map<String, Object> createPost(String creater, List<String> postUrl, String description, String time, String title){
         UUID id = UUID.randomUUID();
-        Post post = new Post(id, description, postUrl, creater,time);
+        Post post = new Post(id, description, postUrl, creater,time,title);
         postDataAccessSerivice.savePost(post);
 
         Map<String, Object> metadata = new HashMap<>();

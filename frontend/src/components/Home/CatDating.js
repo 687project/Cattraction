@@ -34,9 +34,9 @@ export default function CatDating() {
 
     useEffect(() => {
         axios({
-            method: 'get',
-            // url: localStorage.getItem("ip") + `/api/posts/t/cat-dating.json`,
-            url: `/api/posts/t/cat-dating.json`
+            method: 'post',
+            url: localStorage.getItem("ip") + '/api/v1/posts/catdating',
+            params:{ }
         }).then(res => {
             setPostList(res.data);
         })
