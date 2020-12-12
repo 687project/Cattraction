@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Content from "./Content";
 import CatDating from "./CatDating";
+import ComingSoon from "./ComingSoon";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -72,10 +73,8 @@ export default function TopicTabs() {
                 >
                     <Tab label="Recommendation" {...a11yProps(0)} className={classes.tab}/>
                     <Tab label="Daily Feed" {...a11yProps(1)} className={classes.tab}/>
-                    <Tab label="Cattery" {...a11yProps(2)} className={classes.tab}/>
-                    <Tab label="Cat Food" {...a11yProps(3)} className={classes.tab}/>
-                    <Tab label="Cat Product" {...a11yProps(4)} className={classes.tab}/>
-                    <Tab label="Cat Dating" {...a11yProps(5)} className={classes.tab}/>
+                    <Tab label="Cat Product" {...a11yProps(2)} className={classes.tab}/>
+                    <Tab label="Cat Dating" {...a11yProps(3)} className={classes.tab}/>
                 </Tabs>
             </AppBar>
             <div className={classes.contentWrapper}>
@@ -83,18 +82,12 @@ export default function TopicTabs() {
                     <Content topic="recommendation"/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Content topic="daily-feed"/>
+                    <ComingSoon />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <Content topic="cattery"/>
+                    <ComingSoon />
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <Content topic="cat-food"/>
-                </TabPanel>
-                <TabPanel value={value} index={4}>
-                    <Content topic="cat-product"/>
-                </TabPanel>
-                <TabPanel value={value} index={5}>
                     <CatDating />
                 </TabPanel>
             </div>
