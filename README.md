@@ -32,7 +32,7 @@ http://localhost:3000/
 
 
 ## Visit Online
-Directly Visit Our Deployed Website (without local source code)
+Directly Visit Our Deployed Online Website
 ```
 http://216.171.38.35:3000/home
 ```
