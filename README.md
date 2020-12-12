@@ -11,29 +11,33 @@ Cattraction not only means our website is a wonderful place for cat breeders and
 
 
 
-## Tech Stack
-Java/SpringBoot, React, MongoDB, AWS.
 
-
-## Start the Server
-
-Install Database
+## Install Database
+Install MongoDB
 ```
 sudo apt install mongodb
 ```
 
+## Run Server
 Start Server
 ```
 ./backend.sh
 ./frontend.sh
 ```
 
-Visit Website (with local source code)
+Visit Website
 ```
 http://localhost:3000/
 ```
 
-Or Directly Visit Our Deployed Website (without local source code)
+
+## Visit Online
+Directly Visit Our Deployed Website (without local source code)
 ```
 http://216.171.38.35:3000/home
 ```
+
+
+
+## Tech Stack
+Java/SpringBoot, React, MongoDB, AWS.
