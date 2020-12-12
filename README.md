@@ -28,12 +28,12 @@ Start Server
 ./frontend.sh
 ```
 
-Visit Website
+Visit Website (with local source code)
 ```
 http://localhost:3000/
 ```
 
-Or visit our deployed website directly at
+Or Directly Visit Our Deployed Website (without local source code)
 ```
 http://216.171.38.35:3000/home
 ```
