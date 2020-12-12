@@ -75,7 +75,7 @@ export default function Main(props) {
                         <Grid item xs={12} sm={4}>
                             <TextField
                                 label="Cat Gender"
-                                value={post.catGender === 1 ? "♂" : "♀"}
+                                value={post.catGender == true ? "♂" : "♀"}
                                 inputProps={{ readOnly: true }}
                             />
                         </Grid>

@@ -64,7 +64,7 @@ export default function CatDating() {
                                 />
                                 <CardContent>
                                     <Typography variant="h4" component="h2">
-                                        {post.catName}, {post.catBreed}, {post.catGender === 1 ? 'boy': 'girl'}
+                                        {post.catName}, {post.catBreed}, {post.catGender == true ? 'boy': 'girl'}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary" component="subtitle2">
                                         {post.catLocation}

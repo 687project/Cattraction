@@ -33,7 +33,9 @@ public class CatPost {
         this.cat_name=cat.get("name").toString();
         this.cat_age=cat.get("age").toString();
         this.cat_breed=cat.get("breed").toString();
-        this.cat_gender=cat.get("gender").equals("0")?false:true;
+        //String gender = (String)cat.get("gender");
+        //this.cat_gender = !gender.equals("0");
+        this.cat_gender=cat.get("gender").toString().equals("0")?false:true;
         this.cat_location=cat.get("location").toString();
         this.cat=cat;
     }

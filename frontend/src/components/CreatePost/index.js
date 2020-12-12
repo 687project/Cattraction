@@ -67,9 +67,15 @@ function CreatePost(props) {
 
     const handleSubmit = () => {
         const form = new FormData();
+        var help=true;
         for (let i in photos) {
+          help=false;
             form.append('photos', photos[i]);
         }
+        if (help){
+          alert("Please Upload Photos")
+        }
+        else{
         const data = [];
         form.append('data',localStorage.getItem('email'))
         form.append('data',description)
@@ -105,6 +111,7 @@ function CreatePost(props) {
                 setSuccess(true);
             })
         }
+      }
     }
 
     const handleDeletePhoto = (index) => {

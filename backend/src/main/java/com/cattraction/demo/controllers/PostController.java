@@ -25,6 +25,8 @@ public class PostController {
     private final UserService userService;
     private final CatPostService catpostService;
 
+    private final String defaultImageUrl = "https://cattraction-image-upload.s3.us-east-2.amazonaws.com/Cattraction404.jpg";
+
     @Autowired
     public PostController(PostService postService, UserService userService, CatPostService catpostService) {
         this.postService = postService;
@@ -88,6 +90,7 @@ public class PostController {
         data.put("catGender", post.getCatGender());
         data.put("catLocation", post.getCatLocation());
         data.put("user", udata);
+        data.put("title",post.getTitle());
 
         return data;
     }
@@ -106,6 +109,7 @@ public class PostController {
             }
             postUrl.add(url);
         }
+        if(postUrl.size()==0)postUrl.add(defaultImageUrl);
 
         Map<String, Object> metadata = postService.createPost(
         data.get(0).toString(), postUrl,
@@ -129,6 +133,7 @@ public class PostController {
             }
             postUrl.add(url);
         }
+        if(postUrl.size()==0)postUrl.add(defaultImageUrl);
 
         Map<String, Object> cat_map=new HashMap<>();
         cat_map.put("name",cat.get(0));
