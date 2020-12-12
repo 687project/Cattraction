@@ -6,7 +6,7 @@
 
 The main killer app idea is a comprehensive information service and trendy pet social system.
 
-Cattraction not only means our website is a wonderful place for cat breeders and cattery owners, but also targeted
+Cattraction not only means our website is a wonderful place for cat breeders and cattery owners, but also targeted to build a attractive community to bring happiness and convenience for all cat lovers.
 
 
 
