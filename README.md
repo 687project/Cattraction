@@ -6,29 +6,38 @@
 
 The main killer app idea is a comprehensive information service and trendy pet social system.
 
-Cattraction not only means our website is a wonderful place for cat breeders and cattery owners, but also targeted
+Cattraction not only means our website is a wonderful place for cat breeders and cattery owners, but also targeted to build a attractive community to bring happiness and convenience for all cat lovers.
 
 
 
 
-## Tech Stack
-Java/SpringBoot, React, MongoDB, AWS.
 
-
-## Start the Server
-
-Install MonGoDB
+## Install Database
+Install MongoDB
 ```
 sudo apt install mongodb
 ```
 
-Start the Server
+## Run Server
+Start Server
 ```
 ./backend.sh
 ./frontend.sh
 ```
 
-Or visit our deployed website directly at
+Visit Website
+```
+http://localhost:3000/
+```
+
+
+## Visit Online
+Directly Visit Our Deployed Online Website
 ```
 http://216.171.38.35:3000/home
 ```
+
+
+
+## Tech Stack
+Java/SpringBoot, React, MongoDB, AWS.
