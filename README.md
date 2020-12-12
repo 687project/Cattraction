@@ -19,7 +19,7 @@ sudo apt install mongodb
 ```
 
 ## Run Server
-Start backend and frontend server in **different terminals**
+Start backend and frontend server separately in **different terminals**
 ```
 ./backend.sh
 ./frontend.sh
