@@ -19,7 +19,7 @@ sudo apt install mongodb
 ```
 
 ## Run Server
-Start Server
+Start backend and frontend server in **different terminals**
 ```
 ./backend.sh
 ./frontend.sh
@@ -32,7 +32,7 @@ http://localhost:3000/
 
 
 ## Visit Online
-Directly Visit Our Deployed Online Website
+Directly visit our deployed online website
 ```
 http://216.171.38.35:3000/home
 ```
