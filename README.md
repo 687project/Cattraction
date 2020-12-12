@@ -17,15 +17,20 @@ Java/SpringBoot, React, MongoDB, AWS.
 
 ## Start the Server
 
-Install MonGoDB
+Install Database
 ```
 sudo apt install mongodb
 ```
 
-Start the Server
+Start Server
 ```
 ./backend.sh
 ./frontend.sh
+```
+
+Visit Website
+```
+http://localhost:3000/
 ```
 
 Or visit our deployed website directly at
